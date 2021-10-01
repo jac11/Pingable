@@ -9,7 +9,16 @@ import socket
 import uuid
 import requests
 from subprocess import Popen, PIPE, check_output 
-
+a = """
+ ______ _                   _     _       
+(_____ (_)                 | |   | |      
+ _____) ) ____   ____  ____| | _ | | ____ 
+|  ____/ |  _ \ / _  |/ _  | || \| |/ _  )
+| |    | | | | ( ( | ( ( | | |_) ) ( (/ / 
+|_|    |_|_| |_|\_|| |\_||_|____/|_|\____)
+               (_____|by:jacstory                    
+"""
+print(a)
 host_name  = socket.gethostname()
 Mac_Interface = ':'.join(re.findall('..', '%012x' % uuid.getnode()))
 Mac_Get = Mac_Interface[0:8].replace(":","").upper()
