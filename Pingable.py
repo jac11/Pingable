@@ -11,8 +11,8 @@ import requests
 from subprocess import Popen, PIPE, check_output 
 
 
-def Banner() :
-     Banner = """
+
+Banner = """
  ______ _                   _     _       
 (_____ (_)                 | |   | |      
  _____) ) ____   ____  ____| | _ | | ____ 
@@ -21,9 +21,8 @@ def Banner() :
 |_|    |_|_| |_|\_|| |\_||_|____/|_|\____)
                (_____|by:jacstory                    
 """
-     print(Banner)
+print(Banner)
 
-Banner()
 
 host_name  = socket.gethostname()
 
@@ -78,7 +77,7 @@ class Discover_Network():
                      printF  += ("[+] Mac-Vendor      --------------|- " + vendor)+"\n"
                      printF  += ("\n"+"="*50+'\n')
                      with open(self.args.output,"w+") as out_put:
-                         out_put.write(printF)
+                         out_put.write(Banner+"\n"+printF)
                    scop   = "/"
                    NetworkID = ipaddress.ip_network('{}{}{}'.format(Network_ID,scop,self.args.ping[-2:]))
                    for Host in NetworkID.hosts():
@@ -142,9 +141,15 @@ class Discover_Network():
                            print("[+] TRY HOST        --------------| ",Host)
                            sys.stdout.write('\x1b[1A')
                            sys.stdout.write('\x1b[2K')
-                   Banner()   
+                   print(Banner) 
+                   if self.args.output:
+                      with open(self.args.output,'a') as out_put :
+                          out_put.write(Banner) 
              except KeyboardInterrupt:
-                Banner()
+                print(Banner)
+                if self.args.output:
+                   with open(self.args.output,'a') as out_put :
+                        out_put.write(Banner)
           def args_command(self):
               parser = argparse.ArgumentParser( description="Usage: <OPtion> <arguments> ")
               parser = argparse.ArgumentParser(description="Example: ./PingHost.py -p 10.195.100.0/24  ")
