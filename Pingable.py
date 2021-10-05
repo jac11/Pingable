@@ -37,10 +37,10 @@ count = 0
 for line in Mac:
     line = line.strip()
     if Mac_Get in line  : 
-       vandor = line[7:].replace("   ","") 
+       vandor = line[7:].strip() 
        break 
     elif Mac_Get not  in line  : 
-           vandor = "UNKWON MAC" 
+           vandor = "Unknown-MAC" 
     count += 1
     
 class Discover_Network():
@@ -60,12 +60,12 @@ class Discover_Network():
                    Network_ID = Network.network_address
                    SubNet     = Network.netmask
                    print("\n[*] HOST INFO-\n"+"="*14+"\n")
-                   print("[+] Network-ID      --------------|-  " +  str(Network_ID))
-                   print("[+] NetWork-Prefix  --------------|-  " +  self.args.ping[-2:])
-                   print("[+] Subnet-Mask     --------------|-  " +  str(SubNet))
-                   print("[+] HOST-IP         --------------|-  " +  self.args.ping[0:-3])
-                   print("[+] Mac-ADDRESS     --------------|-  " +  Mac_Interface)
-                   print("[+] Mac-Vandor      --------------|-  " +  vandor)
+                   print("[+] Network-ID      --------------|- " +  str(Network_ID))
+                   print("[+] NetWork-Prefix  --------------|- " +  self.args.ping[-2:])
+                   print("[+] Subnet-Mask     --------------|- " +  str(SubNet))
+                   print("[+] HOST-IP         --------------|- " +  self.args.ping[0:-3])
+                   print("[+] Mac-ADDRESS     --------------|- " +  Mac_Interface)
+                   print("[+] Mac-Vandor      --------------|- " +  vandor)
                    print("\n"+"="*50+'\n')
                    scop = "/"
                    NetworkID = ipaddress.ip_network('{}{}{}'.format(Network_ID,scop,self.args.ping[-2:]))
@@ -97,7 +97,7 @@ class Discover_Network():
                                  vandor1 = line[7:].replace("    ","")  
                                  break
                               elif MacGET not  in line:
-                                    vandor1 = " UNKWON MAC" 
+                                    vandor1 = " Unknown-MAC" 
                               count += 1  
                            if "None" in Mac :
                                 print("[+] Mac-Vandor   --------------|  " + vandor)
@@ -125,8 +125,3 @@ class Discover_Network():
        
 if __name__=="__main__":
    Discover_Network()
-
-
-
-
-
