@@ -37,22 +37,22 @@ count = 0
 for line in Mac:
     line = line.strip()
     if Mac_Get in line  : 
-       vandor = line[7:].strip() 
+       vendor = line[7:].strip() 
        break 
     elif Mac_Get not  in line  : 
-           vandor = "Unknown-MAC" 
+          vendor = "Unknown-MAC" 
     count += 1
     
 class Discover_Network():
           
           def __init__(self):
-             self.args_command()
-             self.Ping_command()            
+               self.args_command()
+               self.Ping_command()            
                 
           def Ping_command(self):
        
              try:
-               if self.args.ping :
+               if self.args.ping or (self.args.ping and self.args.output) :
                    if "/" not in self.args.ping:
                        print("Plese set the subnet netwotk")
                        exit()
@@ -64,10 +64,22 @@ class Discover_Network():
                    print("[+] NetWork-Prefix  --------------|- " +  self.args.ping[-2:])
                    print("[+] Subnet-Mask     --------------|- " +  str(SubNet))
                    print("[+] HOST-IP         --------------|- " +  self.args.ping[0:-3])
-                   print("[+] Mac-ADDRESS     --------------|- " +  Mac_Interface)
-                   print("[+] Mac-Vandor      --------------|- " +  vandor)
+                   print("[+] Mac-Address     --------------|- " +  Mac_Interface)
+                   print("[+] Mac-Vendor      --------------|- " + vendor)
                    print("\n"+"="*50+'\n')
-                   scop = "/"
+                   if self.args.output:
+                     printF  = ""
+                     printF  += ("\n[*] HOST INFO-\n"+"="*14+"\n")+"\n"
+                     printF  += ("[+] Network-ID      --------------|- " +  str(Network_ID))+"\n"
+                     printF  += ("[+] NetWork-Prefix  --------------|- " +  self.args.ping[-2:])+"\n"
+                     printF  += ("[+] Subnet-Mask     --------------|- " +  str(SubNet))+"\n"
+                     printF  += ("[+] HOST-IP         --------------|- " +  self.args.ping[0:-3])+"\n"
+                     printF  += ("[+] Mac-Address     --------------|- " +  Mac_Interface)+"\n"
+                     printF  += ("[+] Mac-Vendor      --------------|- " + vendor)+"\n"
+                     printF  += ("\n"+"="*50+'\n')
+                     with open(self.args.output,"w+") as out_put:
+                         out_put.write(printF)
+                   scop   = "/"
                    NetworkID = ipaddress.ip_network('{}{}{}'.format(Network_ID,scop,self.args.ping[-2:]))
                    for Host in NetworkID.hosts():
                        Host = str(Host)
@@ -75,18 +87,29 @@ class Discover_Network():
                        output   = DisCover.communicate()[0]
                        respons  = DisCover.returncode                       
                        if respons == 0:
-                           print("[+] HOST OnLine  --------------| ",Host)
+                           print("[+] HOST OnLine     --------------| ",Host)
+                           if self.args.output :
+                             printF = str("[+] HOST OnLine     --------------|  " + Host).strip()
+                             with  open (self.args.output,"a") as out_put :
+                                 out_put.write(printF+"\n")
                            pid = Popen(["arp", "-n", Host], stdout=PIPE)
                            arp_host = pid.communicate()[0]
                            Mac = str(re.search(r"(([a-f\d]{1,2}\:){5}[a-f\d]{1,2})",arp_host.decode('utf-8')))\
                            .replace("<re.Match object; span=(114, 131), match='",'').replace("'>",'')
                            
                            if "None" in Mac:
-                                print("[*] Mac ADDRESS  ..............|-",Mac_Interface)
+                                print("[*] Mac-Address     ..............|-",Mac_Interface)
+                                if self.args.output :
+                                   printF = str("[*] Mac-Address     ..............|- "+Mac_Interface).strip()
+                                   with open (self.args.output,'a') as out_put :
+                                          out_put.write(str(printF+"\n"))
                                 interfaceMac = Mac_Interface[0:8].replace(":","").upper() 
-                                              
                            else:
-                               print("[*] Mac ADDRESS  ..............|-",Mac)  
+                                   print("[*] Mac-Address     ..............|-",Mac)
+                                   if self.args.output :  
+                                      printF = str("[*] Mac-Address     ..............|- "+Mac).strip()
+                                      with open (self.args.output,'a') as out_put :
+                                           out_put.write(str(printF+"\n"))
                            MacGET= Mac[0:8].replace(":","").upper()
                            Macdb = open('mac-vendor.txt', 'r')
                            MacFile = Macdb.readlines()
@@ -94,18 +117,29 @@ class Discover_Network():
                            for line in MacFile:
                               line = line.strip()
                               if MacGET in line  : 
-                                 vandor1 = line[7:].replace("    ","")  
+                                 vendor1 = line[7:].replace("    ","")  
                                  break
                               elif MacGET not  in line:
-                                    vandor1 = " Unknown-MAC" 
+                                   vendor1 = " Unknown-MAC" 
                               count += 1  
                            if "None" in Mac :
-                                print("[+] Mac-Vandor   --------------|  " + vandor)
+                                print("[+] Mac-Vendor      --------------|  " +vendor)
+                                if  self.args.output :
+                                    printF = str("[+] Mac-Vendor      --------------|  " +vendor).strip()
+                                    with open(self.args.output ,"a") as out_put :
+                                         out_put.write(str(printF+"\n"))
                            else: 
-                                print("[+] Mac-Vandor   --------------| " + vandor1)               
+                                print("[+] Mac-Vendor      --------------| " +vendor1)
+                                if self.args.output :    
+                                    printF = str("[+] Mac-Vendor      --------------| " +vendor1).strip()
+                                    with open(self.args.output ,"a") as out_put :
+                                         out_put.write(str(printF+"\n"))           
                            print()
+                           if self.args.output:
+                              with open(self.args.output,"a") as out_put :
+                                   out_put.write("\n")
                        else:
-                           print("[+] TRY HOST     --------------| ",Host)
+                           print("[+] TRY HOST        --------------| ",Host)
                            sys.stdout.write('\x1b[1A')
                            sys.stdout.write('\x1b[2K')
                    Banner()   
@@ -114,8 +148,8 @@ class Discover_Network():
           def args_command(self):
               parser = argparse.ArgumentParser( description="Usage: <OPtion> <arguments> ")
               parser = argparse.ArgumentParser(description="Example: ./PingHost.py -p 10.195.100.0/24  ")
-              parser.add_argument( '-p',"--ping"   ,metavar='' , action=None  ,help ="Target ip address or name ")
-              
+              parser.add_argument( '-p',"--ping"   ,metavar='' , action=None  ,help ="Target ip Address or name ")
+              parser.add_argument( '-o',"--output"   ,metavar='' , action=None  ,help ="Target ip Address or name ")
               self.args = parser.parse_args()
               if len(sys.argv)> 1 :
                    pass
