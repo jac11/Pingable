@@ -53,7 +53,7 @@ class Discover_Network():
              try:
                if self.args.ping or (self.args.ping and self.args.output) :
                    if "/" not in self.args.ping:
-                       print("Plese set the subnet netwotk")
+                       print("[*] Set the Subnet Netwotk....")
                        exit()
                    Network    = ipaddress.ip_network('{}'.format(self.args.ping), strict=False)
                    Network_ID = Network.network_address
@@ -67,16 +67,16 @@ class Discover_Network():
                    print("[+] Mac-Vendor      --------------|- " + vendor)
                    print("\n"+"="*50+'\n')
                    if self.args.output:
-                     printF  = ""
-                     printF  += ("\n[*] HOST INFO-\n"+"="*14+"\n")+"\n"
-                     printF  += ("[+] Network-ID      --------------|- " +  str(Network_ID))+"\n"
-                     printF  += ("[+] NetWork-Prefix  --------------|- " +  self.args.ping[-2:])+"\n"
-                     printF  += ("[+] Subnet-Mask     --------------|- " +  str(SubNet))+"\n"
-                     printF  += ("[+] HOST-IP         --------------|- " +  self.args.ping[0:-3])+"\n"
-                     printF  += ("[+] Mac-Address     --------------|- " +  Mac_Interface)+"\n"
-                     printF  += ("[+] Mac-Vendor      --------------|- " + vendor)+"\n"
-                     printF  += ("\n"+"="*50+'\n')
-                     with open(self.args.output,"w+") as out_put:
+                      printF  = ""
+                      printF  += ("\n[*] HOST INFO-\n"+"="*14+"\n")+"\n"
+                      printF  += ("[+] Network-ID      --------------|- " +  str(Network_ID))+"\n"
+                      printF  += ("[+] NetWork-Prefix  --------------|- " +  self.args.ping[-2:])+"\n"
+                      printF  += ("[+] Subnet-Mask     --------------|- " +  str(SubNet))+"\n"
+                      printF  += ("[+] HOST-IP         --------------|- " +  self.args.ping[0:-3])+"\n"
+                      printF  += ("[+] Mac-Address     --------------|- " +  Mac_Interface)+"\n"
+                      printF  += ("[+] Mac-Vendor      --------------|- " + vendor)+"\n"
+                      printF  += ("\n"+"="*50+'\n')
+                      with open(self.args.output,"w+") as out_put:
                          out_put.write(Banner+"\n"+printF)
                    scop   = "/"
                    NetworkID = ipaddress.ip_network('{}{}{}'.format(Network_ID,scop,self.args.ping[-2:]))
@@ -164,3 +164,5 @@ class Discover_Network():
        
 if __name__=="__main__":
    Discover_Network()
+
+
