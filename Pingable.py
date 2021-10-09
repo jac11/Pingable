@@ -55,26 +55,37 @@ class Discover_Network():
                    if "/" not in self.args.ping:
                        print("[*] Set the Subnet Netwotk....")
                        exit()
-                   Network    = ipaddress.ip_network('{}'.format(self.args.ping), strict=False)
-                   Network_ID = Network.network_address
-                   SubNet     = Network.netmask
+                   Network     = ipaddress.ip_network('{}'.format(self.args.ping), strict=False)
+                   Network_ID  = Network.network_address
+                   SubNet      = Network.netmask
+                   Hosts_range = Network.num_addresses - 2 
                    print("\n[*] HOST INFO-\n"+"="*14+"\n")
-                   print("[+] Network-ID      --------------|- " +  str(Network_ID))
-                   print("[+] NetWork-Prefix  --------------|- " +  self.args.ping[-2:])
-                   print("[+] Subnet-Mask     --------------|- " +  str(SubNet))
                    print("[+] HOST-IP         --------------|- " +  self.args.ping[0:-3])
                    print("[+] Mac-Address     --------------|- " +  Mac_Interface)
                    print("[+] Mac-Vendor      --------------|- " + vendor)
+                   print("\n[*] NETWORK INFO-\n"+"="*14+"\n")
+                   print("[+] Network-ID      --------------|- " +  str(Network_ID))
+                   print("[+] NetWork-Prefix  --------------|- " +  self.args.ping[-2:])
+                   print("[+] Subnet-Mask     --------------|- " +  str(SubNet))
+                   print("[+] Start ip        --------------|- " +  str([ x for x in Network.hosts()][0]))
+                   print("[+] Last ip         --------------|- " +  str([ x for  x  in  Network.hosts()][-1]))
+                   print("[+] Number of hosts --------------|- " +  str(Hosts_range ))
+                   print("[+] Broadcast IP    --------------|- " +  str(Network.broadcast_address))
                    print("\n"+"="*50+'\n')
                    if self.args.output:
                       printF  = ""
                       printF  += ("\n[*] HOST INFO-\n"+"="*14+"\n")+"\n"
-                      printF  += ("[+] Network-ID      --------------|- " +  str(Network_ID))+"\n"
-                      printF  += ("[+] NetWork-Prefix  --------------|- " +  self.args.ping[-2:])+"\n"
-                      printF  += ("[+] Subnet-Mask     --------------|- " +  str(SubNet))+"\n"
                       printF  += ("[+] HOST-IP         --------------|- " +  self.args.ping[0:-3])+"\n"
                       printF  += ("[+] Mac-Address     --------------|- " +  Mac_Interface)+"\n"
                       printF  += ("[+] Mac-Vendor      --------------|- " + vendor)+"\n"
+                      printF  += ("\n[*] NETWIRK INFO-\n"+"="*14+"\n")+"\n"
+                      printF  += ("[+] Network-ID      --------------|- " +  str(Network_ID))+"\n"
+                      printF  += ("[+] NetWork-Prefix  --------------|- " +  self.args.ping[-2:])+"\n"
+                      printF  += ("[+] Subnet-Mask     --------------|- " +  str(SubNet))+"\n"
+                      printF  += ("[+] Start ip        --------------|- " +  str([ x for x in Network.hosts()][0]))+"\n"
+                      printF  += ("[+] Last ip         --------------|- " +  str([ x for  x  in  Network.hosts()][-1]))+"\n"
+                      printF  += ("[+] Number of hosts --------------|- " +  str(Hosts_range ))+"\n"
+                      printF  += ("[+] Broadcast IP    --------------|- " +  str(Network.broadcast_address))+"\n"
                       printF  += ("\n"+"="*50+'\n')
                       with open(self.args.output,"w+") as out_put:
                          out_put.write(Banner+"\n"+printF)
