@@ -45,16 +45,16 @@ for line in Mac:
     
 class Discover_Network():
           
-          def __init__(self):
+      def __init__(self):
                self.args_command()
                self.Ping_command()            
                 
-          def Ping_command(self):
-       
+      def Ping_command(self):
+         try:      
              try:
                if self.args.network or (self.args.network and self.args.output) :
                    if "/" not in self.args.network:
-                       print("[*] Set the Subnet Netwotk....")
+                       print("\n"+"="*50+"\n"+"[*] Set the Subnet Netwotk...."+"\n"+"="*50+"\n")
                        exit()
                    Network     = ipaddress.ip_network('{}'.format(self.args.network), strict=False)
                    Network_ID  = Network.network_address
@@ -72,7 +72,7 @@ class Discover_Network():
                    print("[+] Last ip         --------------|- " +  str([ x for  x  in  Network.hosts()][-1]))
                    print("[+] Number of hosts --------------|- " +  str(Hosts_range ))
                    print("[+] Broadcast IP    --------------|- " +  str(Network.broadcast_address))
-                   print("\n"+"="*50+'\n')
+                   print("\n"+"="*50+"\n"+"[*] Host-discover-"+"\n"+"="*20+"\n")
                    if self.args.output:
                       printF  = ""
                       printF  += ("\n[*] HOST INFO-\n"+"="*14+"\n")+"\n"
@@ -87,7 +87,7 @@ class Discover_Network():
                       printF  += ("[+] Last ip         --------------|- " +  str([ x for  x  in  Network.hosts()][-1]))+"\n"
                       printF  += ("[+] Number of hosts --------------|- " +  str(Hosts_range ))+"\n"
                       printF  += ("[+] Broadcast IP    --------------|- " +  str(Network.broadcast_address))+"\n"
-                      printF  += ("\n"+"="*50+'\n')
+                      printF  += ("\n"+"="*50+"\n"+"[*] Host-discover-"+"\n"+"="*20+"\n\n")
                       with open(self.args.output,"w+") as out_put:
                          out_put.write(Banner+"\n"+printF)
                    scop   = "/"
@@ -155,13 +155,15 @@ class Discover_Network():
                    print(Banner) 
                    if self.args.output:
                       with open(self.args.output,'a') as out_put :
-                          out_put.write(Banner) 
-             except KeyboardInterrupt:
-                print(Banner)
-                if self.args.output:
-                   with open(self.args.output,'a') as out_put :
-                        out_put.write(Banner)
-          def args_command(self):
+                          out_put.write(Banner)
+             except Exception:
+                    print("\n"+"="*50+"\n"+"[*] HOST (",self.args.network,")   -------------| ValueError"+"\n"+"="*50+"\n")
+         except KeyboardInterrupt:
+              print(Banner)
+              if self.args.output:
+                 with open(self.args.output,'a') as out_put :
+                      out_put.write(Banner)
+      def args_command(self):
               parser = argparse.ArgumentParser( description="Usage: <OPtion> <arguments> ")
               parser = argparse.ArgumentParser(description="Example: ./PingHost.py -p 10.195.100.0/24  ")
               parser.add_argument( '-N',"--network"   ,metavar='' , action=None  ,help ="ping all Network ,IPaddress/subnet ")
