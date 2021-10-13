@@ -45,21 +45,32 @@ for line in Mac:
     
 class RangeOfHosts :
           
-          def __init__(self):
+      def __init__(self):
                self.args_command()
                self.Ping_Range()            
                 
-          def Ping_Range(self):
-       
-             try:
+      def Ping_Range(self):
+         try:     
+             #try:
                if self.args.network or (self.args.network and self.args.output) :
                    if "/" not in self.args.network:
-                       print("[*] Set the Subnet Netwotk....")
+                       print("\n"+"="*50+"\n"+"[*] Set the Subnet Netwotk...."+"\n"+"="*50+"\n")
                        exit()
+                   
                    Network     = ipaddress.ip_network('{}'.format(self.args.network), strict=False)
                    Network_ID  = Network.network_address
                    SubNet      = Network.netmask
                    Hosts_range = Network.num_addresses - 2 
+                   if int(self.args.start) < int(self.args.end):
+                         total = int(self.args.end) - int(self.args.start)
+                   else:
+                      print("\n"+"="*50+"\n"+"[+] Erorr       --------------|- Strat < End  "+"\n"+"="*50+"\n")
+                      exit()
+                   if int(self.args.start) > 265 or int(self.args.end) > 256:
+                      print("\n"+"="*50+"\n"+"[+] Erorr       --------------|- Host-Count > 255 Hosts "+"\n"+"="*50+"\n")
+                      exit()
+                   else:
+                       pass  
                    print("\n[*] HOST INFO-\n"+"="*14+"\n")
                    print("[+] HOST-IP         --------------|- " +  host_ip)
                    print("[+] Mac-Address     --------------|- " +  Mac_Interface)
@@ -73,10 +84,10 @@ class RangeOfHosts :
                    print("[+] Number of hosts --------------|- " +  str(Hosts_range ))
                    print("[+] Broadcast IP    --------------|- " +  str(Network.broadcast_address))
                    print("\n[*] Range Host -\n"+"="*14)
-                   print("[+] start-Host       --------------|- " + self.args.start)
-                   print("[+] End-Host         --------------|- " +  self.args.end)
-                   print("\n"+"="*50+'\n')
-                   
+                   print("[+] Start-Count     --------------|- " +  self.args.start)
+                   print("[+] End-Count       --------------|- " +  self.args.end)
+                   print("[+] Host-Count      --------------|- " +  str(total ))
+                   print("\n"+"="*50+"\n"+"[*] Host-discover-"+"\n"+"="*20+"\n")
                    if self.args.output:
                       printF  = ""
                       printF  += ("\n[*] HOST INFO-\n"+"="*14+"\n")+"\n"
@@ -92,19 +103,22 @@ class RangeOfHosts :
                       printF  += ("[+] Number of hosts --------------|- " +  str(Hosts_range ))+"\n"
                       printF  += ("[+] Broadcast IP    --------------|- " +  str(Network.broadcast_address))+"\n"
                       printF  += ("\n[*] Range Host -\n"+"="*14)+"\n"
-                      printF  += ("[+] start-Host       --------------|- " + self.args.start)+"\n"
-                      printF  += ("[+] End-Host         --------------|- " +  self.args.end)+"\n"
-                      printF  += ("\n"+"="*50+'\n\n')
+                      printF  += ("[+] Start-Count     --------------|- " +  self.args.start)+"\n"
+                      printF  += ("[+] End-Count       --------------|- " +  self.args.end)+"\n"
+                      printF  += ("[+] Host-Count      --------------|- " +  str(total))+"\n"
+                      printF  += ("\n"+"="*50+"\n"+"[*] Host-discover-"+"\n"+"="*20+"\n\n")
                       with open(self.args.output,"w+") as out_put:
                          out_put.write(Banner+"\n"+printF)
                    scop   = "/"
-                   NetworkID = ipaddress.ip_network('{}{}{}'.format(Network_ID,scop,self.args.network[-2:]))               
-                   for Host_Num in range(int(self.args.start),int(self.args.end)) :
-                       fix  = self.args.network
-                       ip,sub = fix.split('/')
-                       oct_ip = ip.split('.')
-                       oct_ip.remove(oct_ip[3])
-                       oct_ip.append(Host_Num)
+                   NetworkID = ipaddress.ip_network('{}{}{}'.format(Network_ID,scop,self.args.network[-2:]))   
+                   fix  = self.args.network
+                   ip,sub = fix.split('/')
+                   oct_ip = ip.split('.')
+                   Host_Num = 0
+                   for Host_Num in range(int(self.args.start),int(self.args.end)+1) :                      
+                       if Host_Num == 256 :  
+                         break
+                       oct_ip[3] = Host_Num 
                        Host = str(oct_ip).replace("['","").replace("'","").replace(",",".").replace("]","").replace(" ","")               
                        DisCover = Popen(["ping", "-c1",Host], stdout=PIPE)
                        output   = DisCover.communicate()[0]
@@ -168,12 +182,14 @@ class RangeOfHosts :
                    if self.args.output:
                       with open(self.args.output,'a') as out_put :
                           out_put.write("="*50+"\n"+Banner) 
-             except KeyboardInterrupt:
+            # except Exception:
+             #      print("\n"+"="*50+"\n"+"[*] HOST (",self.args.network,")   -------------| ValueError"+"\n"+"="*50+"\n")
+         except KeyboardInterrupt:
                 print(Banner)
                 if self.args.output:
                    with open(self.args.output,'a') as out_put :
                         out_put.write(Banner)
-          def args_command(self):
+      def args_command(self):
               parser = argparse.ArgumentParser( description="Usage: <OPtion> <arguments> ")
               parser = argparse.ArgumentParser(description="Example: ./PingHost.py -p 10.195.100.0/24  ")
               parser.add_argument( '-N',"--network"   ,metavar='' , action=None  ,help ="ping all Network ,IPaddress/subnet ")
