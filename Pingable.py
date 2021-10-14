@@ -32,7 +32,7 @@ class Run :
               if len(sys.argv)> 1 :
                    pass
               else:
-                   #print( Banner)
+                   print( Banner)
                    parser.print_help()
                    exit()
 
