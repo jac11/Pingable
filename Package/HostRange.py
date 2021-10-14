@@ -9,19 +9,7 @@ import socket
 import uuid
 import requests
 from subprocess import Popen, PIPE, check_output 
- 
- 
- 
-Banner = """
- ______ _                   _     _       
-(_____ (_)                 | |   | |      
- _____) ) ____   ____  ____| | _ | | ____ 
-|  ____/ |  _ \ / _  |/ _  | || \| |/ _  )
-| |    | | | | ( ( | ( ( | | |_) ) ( (/ / 
-|_|    |_|_| |_|\_|| |\_||_|____/|_|\____)
-               (_____|by:jacstory                    
-"""
-print(Banner)
+from Package.Banner import * 
  
  
 host_name  = socket.gethostname()
@@ -191,11 +179,10 @@ class RangeOfHosts :
                         out_put.write(Banner)
       def args_command(self):
               parser = argparse.ArgumentParser( description="Usage: <OPtion> <arguments> ")
-              parser = argparse.ArgumentParser(description="Example: ./PingHost.py -p 10.195.100.0/24  ")
-              parser.add_argument( '-N',"--network"   ,metavar='' , action=None  ,help ="ping all Network ,IPaddress/subnet ")
-              parser.add_argument( '-S',"--start"   ,metavar='' , action=None  ,help ="ping all Network ,IPaddress/subnet ")
-              parser.add_argument( '-O',"--output"   ,metavar='' , action=None  ,help ="Target ip Address or name ")
-              parser.add_argument( '-E',"--end"   ,metavar='' , action=None  ,help ="Target ip Address or name ")
+              parser.add_argument( '-N',"--network"   ,metavar='' , action=None ) 
+              parser.add_argument( '-S',"--start"   ,metavar='' , action=None )
+              parser.add_argument( '-O',"--output"   ,metavar='' , action=None)
+              parser.add_argument( '-E',"--end"   ,metavar='' , action=None  )
               self.args = parser.parse_args()
               if len(sys.argv)> 1 :
                    pass
