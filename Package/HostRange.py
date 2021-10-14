@@ -19,8 +19,11 @@ Mac_Interface = ':'.join(re.findall('..', '%012x' % uuid.getnode()))
 Mac_Get = Mac_Interface[0:8].replace(":","").upper()
 Macdb = open('Package/mac-vendor.txt', 'r')
 Mac = Macdb.readlines()
-host_name  = socket.gethostname()
-host_ip    = check_output(['hostname', '--all-ip-addresses']).decode('utf8').replace('\n','')
+try:
+   host_name  = socket.gethostname() 
+   host_ip    = check_output(['hostname', '--all-ip-addresses'],stderr=subprocess.PIPE).decode('utf8').replace('\n','')
+except Exception :
+   host_ip = sys.argv[2][:-3]
 count = 0
 for line in Mac:
     line = line.strip()
@@ -39,7 +42,7 @@ class RangeOfHosts :
                 
       def Ping_Range(self):
          try:     
-             #try:
+             try:
                if self.args.network or (self.args.network and self.args.output) :
                    if "/" not in self.args.network:
                        print("\n"+"="*50+"\n"+"[*] Set the Subnet Netwotk...."+"\n"+"="*50+"\n")
@@ -170,8 +173,8 @@ class RangeOfHosts :
                    if self.args.output:
                       with open(self.args.output,'a') as out_put :
                           out_put.write("="*50+"\n"+Banner) 
-            # except Exception:
-             #      print("\n"+"="*50+"\n"+"[*] HOST (",self.args.network,")   -------------| ValueError"+"\n"+"="*50+"\n")
+             except Exception:
+                   print("\n"+"="*50+"\n"+"[*] HOST (",self.args.network,")   -------------| ValueError"+"\n"+"="*50+"\n")
          except KeyboardInterrupt:
                 print(Banner)
                 if self.args.output:
