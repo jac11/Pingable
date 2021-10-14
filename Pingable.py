@@ -2,7 +2,7 @@
 
 import argparse
 import sys
-
+from Package.Banner import *
 class Run :
         def __init__(self):
             self.args_command()  
@@ -24,14 +24,15 @@ class Run :
               parser = argparse.ArgumentParser( description="Usage: <OPtion> <arguments> ")
               parser.add_argument( '-N',"--network"   ,metavar='' , action=None  ,help ="ping all Network ,IPaddress/subnet ")
               parser.add_argument( '-H',"--Host"      ,metavar='' , action=None  ,help ="Ping One Host Only ")
-              parser.add_argument( '-O',"--output"    ,metavar='' , action=None  ,help ="out put file report ")
-              parser.add_argument( '-S',"--start"     ,metavar='' , action=None  ,help ="ping range of ips start from")
-              parser.add_argument( '-E',"--end"       ,metavar='' , action=None  ,help ="en of the range of ips to ping ")
+              parser.add_argument( '-O',"--output"    ,metavar='' , action=None  ,help ="output file report ")
+              parser.add_argument( '-S',"--start"     ,metavar='' , action=None  ,help ="start of the range Ips ")
+              parser.add_argument( '-E',"--end"       ,metavar='' , action=None  ,help ="end of the range ips ")
 
               self.args = parser.parse_args()
               if len(sys.argv)> 1 :
                    pass
               else:
+                   #print( Banner)
                    parser.print_help()
                    exit()
 
