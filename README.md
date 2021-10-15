@@ -1,14 +1,15 @@
-# Pingable
-### -Pingable it's tool help to discover the hosts in network witen by Python3
-* Pingable use the ICMP protcol to ping the hosts on the same network or pingable network
-* if the firewall set to drob the ICMP packet so you can not dicover the host put still able to bing other hosts on same net work
+###-Pingable
+-Pingable its tool help to discover the hosts in the network written by Python3
+Pingable uses the ICMP protocol to ping the hosts on the same network or pingable network
+if the firewall is set to drop the ICMP packet so you can not discover the host put still able to bing other hosts on the same network
 
-## dicover mac and the vendor -
-     to can get full ideas about the network you shoud know the nertwork devices  and tne vendor about it
-     Pingale use the Arp protcol to grep the mac address of devices over network it read form file mac-vendor 
-     mac-vendor file.txt have 43212 mac address to grep mac from the list afer comolie the mac with 
-     the mac device get form arp protcol  
- 
+## discover mac and the vendor -
+     
+ to can get full ideas about the network you should know the network devices  and the vendor about it
+ Pingale use the Arp protocol to grep the mac address of devices over a network it read from file mac-vendor 
+ mac-vendor file.txt have 43212 mac address to grep mac from the list after compiling the mac with 
+ the mac device get from arp protocol   
+
  ### How to use
  * git clone https://www.github.com/jac11/Pingable.git
  * cd Pingable
@@ -35,9 +36,11 @@ optional arguments:
   -S , --start     start of the range Ips
   -E , --end       end of the range ips
 ```
-* for ping all subnet  use -N or --Network with subnet ./Pingable.py -N 192.168.1.22/24 use your lan ipaddress with Subnet Mask 
-* to ping one Host Use -H or --Host ./Pingable  -H 10.195.100.2/24 or 10.195.100.2
+* for ping all subnet use -N or --Network with subnet ./Pingable.py -N 192.168.1.22/24 use your LAN IP address with Subnet Mask
+* to ping one Host Use -H or --Host ./Pingable -H 10.195.100.2/24 or 10.195.100.2
 * to ping renge of ip form use ./Pingable.py -N192.168.1.34/24 -S 20 -E 100 -O report.txt
-* -S start range of ip -E end range of ip -O to save the output in to file 
-  - noted :
-  - to use ping range of ip working  with /24 to /32 so mixmune ip2 254 hosts
+   -S start range of IP -E end range of IP -O to save the output into file
+* noted :
+        -  To use Pingable to discover a range of ips working with /24 to /32 so the maximum Number of Hosts is 254 host 
+        
+        
