@@ -9,14 +9,17 @@ class Run :
             self.control()
         def control(self):
            if self.args.network and not self.args.start and not self.args.end :
+              print(Banner)
               from Package.Pingclass import  Discover_Network
               run = Discover_Network()
               exit()
            elif self.args.start and self.args.end :
+              print(Banner)
               from Package.HostRange import RangeOfHosts
               run = RangeOfHosts()
               exit()
            elif self.args.Host :
+                 print(Banner)
                  from Package.OneHost import  Host_One
                  run = Host_One()
                  exit()
