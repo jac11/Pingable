@@ -4,22 +4,23 @@ import argparse
 import sys
 from Package.Banner import *
 class Run :
+        print(Banner)
         def __init__(self):
             self.args_command()  
             self.control()
         def control(self):
            if self.args.network and not self.args.start and not self.args.end :
-              print(Banner)
+             
               from Package.Pingclass import  Discover_Network
               run = Discover_Network()
               exit()
            elif self.args.start and self.args.end :
-              print(Banner)
+              
               from Package.HostRange import RangeOfHosts
               run = RangeOfHosts()
               exit()
            elif self.args.Host :
-                 print(Banner)
+              
                  from Package.OneHost import  Host_One
                  run = Host_One()
                  exit()
@@ -33,6 +34,7 @@ class Run :
 
               self.args = parser.parse_args()
               if len(sys.argv)> 1 :
+                   
                    pass
               else:
                    print( Banner)
