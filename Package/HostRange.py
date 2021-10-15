@@ -11,11 +11,8 @@ import requests
 from subprocess import Popen, PIPE, check_output 
 from Package.Banner import * 
 import subprocess
- 
-host_name  = socket.gethostname()
- 
+  
 Mac_Interface = ':'.join(re.findall('..', '%012x' % uuid.getnode()))
- 
 Mac_Get = Mac_Interface[0:8].replace(":","").upper()
 Macdb = open('Package/mac-vendor.txt', 'r')
 Mac = Macdb.readlines()
