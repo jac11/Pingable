@@ -1,6 +1,6 @@
 # Pingable
 ### - Pingable
-- Pingable its tool help to discover the hosts in the network written by Python3
+- its tool help to discover the hosts in the network written by Python3
 Pingable uses the ICMP protocol to ping the hosts on the same network or pingable network
 if the firewall is set to drop the ICMP packet so you can not discover the host put still able to bing other hosts on the same network
 
