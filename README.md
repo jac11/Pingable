@@ -4,6 +4,6 @@
 * if the firewall set to drob the ICMP packet so you can not dicover the host put still able to bing other hosts on same net work
 
 ## dicover mac and the vendor -
-   * to can get full ideas about the network you shoud know the nertwork devices  and tne vendor about it
-   * Pingale use the Arp protcol to grep the mac address of devices over network it read form file mac-vendor 
-   * mac-vendor file.txt have 
+   - to can get full ideas about the network you shoud know the nertwork devices  and tne vendor about it
+   - Pingale use the Arp protcol to grep the mac address of devices over network it read form file mac-vendor 
+   - mac-vendor file.txt have 
