@@ -10,7 +10,7 @@ import uuid
 import requests
 from subprocess import Popen, PIPE, check_output 
 from Package.Banner import * 
- 
+import subprocess
  
 host_name  = socket.gethostname()
  
@@ -23,7 +23,10 @@ try:
    host_name  = socket.gethostname() 
    host_ip    = check_output(['hostname', '--all-ip-addresses'],stderr=subprocess.PIPE).decode('utf8').replace('\n','')
 except Exception :
-   host_ip = sys.argv[2][:-3]
+   if "/" in sys.argv[2]:
+       host_ip = sys.argv[2][:-3]
+   else:
+       host_ip = sys.argv[2]
 count = 0
 for line in Mac:
     line = line.strip()
