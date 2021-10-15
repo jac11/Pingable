@@ -40,7 +40,7 @@ optional arguments:
 * to ping one Host Use -H or --Host ./Pingable -H 10.195.100.2/24 or 10.195.100.2
 * to ping renge of ip form use ./Pingable.py -N192.168.1.34/24 -S 20 -E 100 -O report.txt
    -S start range of IP -E end range of IP -O to save the output into file
-* noted :
-        -  To use Pingable to discover a range of ips working with /24 to /32 so the maximum Number of Hosts is 254 host 
+### noted :
+ -  To use Pingable to discover a range of ips working with /24 to /32 so the maximum Number of Hosts is 254 host 
         
         
