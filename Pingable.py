@@ -37,7 +37,6 @@ class Run :
                    
                    pass
               else:
-                   print( Banner)
                    parser.print_help()
                    exit()
 
