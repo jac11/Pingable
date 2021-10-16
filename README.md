@@ -43,5 +43,11 @@ optional arguments:
    -S start range of IP -E end range of IP -O to save the output into file
 ### noted :
  -  To use Pingable to discover a range of ips working with /24 to /32 so the maximum Number of Hosts is 254 host 
+ ### Screenshot
+ <img src = "images/1.png"width=400><img src = "images/2.png"width=400><img src = "images/3.png"width=400 >
+ <img src = "images/4.png"width=400><img src = "images/11.png"><img src = "images/12.png" >
         
-        
+### [for Connect]
+* administrator@jacstory.tech
+* thank you 
+
