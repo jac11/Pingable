@@ -87,7 +87,7 @@ class Discover_Network():
                    NetworkID = ipaddress.ip_network('{}{}{}'.format(Network_ID,scop,self.args.network[-2:]))
                    for Host in NetworkID.hosts():
                        Host = str(Host)
-                       DisCover = Popen(["ping", "-c1",Host], stdout=PIPE)
+                       DisCover = Popen(["ping", "-w1",Host], stdout=PIPE)
                        output   = DisCover.communicate()[0]
                        respons  = DisCover.returncode                       
                        if respons == 0:
