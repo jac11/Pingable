@@ -106,6 +106,8 @@ class RangeOfHosts :
                    ip,sub = fix.split('/')
                    oct_ip = ip.split('.')
                    Host_Num = 0
+                   Hcount = 0
+                   dcount = 0
                    for Host_Num in range(int(self.args.start),int(self.args.end)+1) :                      
                        if Host_Num == 256 :  
                          break
@@ -169,10 +171,19 @@ class RangeOfHosts :
                            print("[+] TRY HOST        --------------| ",Host)
                            sys.stdout.write('\x1b[1A')
                            sys.stdout.write('\x1b[2K')
-                   print("="*50+"\n"+Banner) 
+                   print("\n[*] SCAN RSULET-\n"+"="*14+"\n")
+                   print("[+] Total Hosts       --------------|- " +  str(Hosts_range))
+                   print("[+] Active Hosts      --------------|- " +  str(Hcount))
+                   print("[+] Inactive Hosts    --------------|- " +  str(dcount))                
+                   print(Banner) 
                    if self.args.output:
-                      with open(self.args.output,'a') as out_put :
-                          out_put.write("="*50+"\n"+Banner) 
+                        printF = ""
+                        printF += ("\n[*] SCAN RSULET-\n"+"="*14+"\n")+"\n"
+                        printF += ("[+] Total Hosts       --------------|- " +  str(Hosts_range))+"\n"
+                        printF += ("[+] Active Hosts      --------------|- " +  str(Hcount))+"\n"
+                        printF += ("[+] Inactive Hosts    --------------|- " +  str(dcount))+"\n"
+                        with open(self.args.output,'a') as out_put :
+                             out_put.write(printF+Banner)
              except Exception:
                    print("\n"+"="*50+"\n"+"[*] HOST (",self.args.network,")   -------------| ValueError"+"\n"+"="*50+"\n")
          except KeyboardInterrupt:
@@ -195,8 +206,3 @@ class RangeOfHosts :
        
 if __name__=="__main__":
    RangeOfHosts()
-
-
-
- 
- 
