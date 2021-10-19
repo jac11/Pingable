@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+ #!/usr/bin/env python3
  
 import os
 import sys
@@ -85,12 +85,15 @@ class Discover_Network():
                          out_put.write(Banner+"\n"+printF)
                    scop   = "/"
                    NetworkID = ipaddress.ip_network('{}{}{}'.format(Network_ID,scop,self.args.network[-2:]))
+                   Hcount = 0
+                   dcount = 0
                    for Host in NetworkID.hosts():
                        Host = str(Host)
                        DisCover = Popen(["ping", "-w1",Host], stdout=PIPE)
                        output   = DisCover.communicate()[0]
                        respons  = DisCover.returncode                       
                        if respons == 0:
+                           Hcount  +=1	
                            print("[+] HOST OnLine     --------------| ",Host)
                            if self.args.output :
                              printF = str("[+] HOST OnLine     --------------|  " + Host).strip()
@@ -141,14 +144,25 @@ class Discover_Network():
                            if self.args.output:
                               with open(self.args.output,"a") as out_put :
                                    out_put.write("\n")
+
                        else:
+                           dcount +=1
                            print("[+] TRY HOST        --------------| ",Host)
                            sys.stdout.write('\x1b[1A')
                            sys.stdout.write('\x1b[2K')
+                   print("\n[*] SCAN RSULET-\n"+"="*14+"\n")
+                   print("[+] Total Hosts       --------------|- " +  str(Hosts_range))
+                   print("[+] Active Hosts      --------------|- " +  str(Hcount))
+                   print("[+] Inactive Hosts    --------------|- " +  str(dcount))                
                    print(Banner) 
                    if self.args.output:
+                      printF = ""
+                      printF += ("\n[*] SCAN RSULET-\n"+"="*14+"\n")+"\n"
+                      printF += ("[+] Total Hosts       --------------|- " +  str(Hosts_range))+"\n"
+                      printF += ("[+] Active Hosts      --------------|- " +  str(Hcount))+"\n"
+                      printF += ("[+] Inactive Hosts    --------------|- " +  str(dcount))+"\n"
                       with open(self.args.output,'a') as out_put :
-                          out_put.write(Banner)
+                          out_put.write(printF+Banner)
              except Exception:
                     print("\n"+"="*50+"\n"+"[*] HOST (",self.args.network,")   -------------| ValueError"+"\n"+"="*50+"\n")
          except KeyboardInterrupt:
@@ -170,4 +184,4 @@ class Discover_Network():
 if __name__=="__main__":
    Discover_Network()
  
- 
+
