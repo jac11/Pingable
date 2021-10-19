@@ -92,7 +92,7 @@ class Host_One():
                        Host = self.args.Host.replace(self.args.Host[-3:],"")
                    else:
                        Host = self.args.Host
-                   DisCover = Popen(["ping", "-c1",Host], stdout=PIPE)
+                   DisCover = Popen(["ping", "-w1",Host], stdout=PIPE)
                    output   = DisCover.communicate()[0]
                    respons  = DisCover.returncode                       
                    if respons == 0:
