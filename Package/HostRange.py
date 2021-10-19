@@ -111,7 +111,7 @@ class RangeOfHosts :
                          break
                        oct_ip[3] = Host_Num 
                        Host = str(oct_ip).replace("['","").replace("'","").replace(",",".").replace("]","").replace(" ","")               
-                       DisCover = Popen(["ping", "-c1",Host], stdout=PIPE)
+                       DisCover = Popen(["ping", "-w1",Host], stdout=PIPE)
                        output   = DisCover.communicate()[0]
                        respons  = DisCover.returncode                       
                        if respons == 0:
