@@ -17,8 +17,9 @@ Mac_Get = Mac_Interface[0:8].replace(":","").upper()
 Macdb = open('Package/mac-vendor.txt', 'r')
 Mac = Macdb.readlines()
 try:
-   host_name  = socket.gethostname() 
-   host_ip    = check_output(['hostname', '--all-ip-addresses'],stderr=subprocess.PIPE).decode('utf8').replace('\n','')
+    host_name  = socket.gethostname() 
+    host_ip    = str(check_output(['hostname', '--all-ip-addresses'],stderr=subprocess.PIPE)).\
+    replace("b'","").replace("'","").replace(" ","").replace("\\n","")
 except Exception :
    if "/" in sys.argv[2]:
        host_ip = sys.argv[2][:-3]
@@ -104,15 +105,21 @@ class Host_One():
                            pid = Popen(["arp", "-n", Host], stdout=PIPE)
                            arp_host = pid.communicate()[0]
                            Mac = str(re.search(r"(([a-f\d]{1,2}\:){5}[a-f\d]{1,2})",arp_host.decode('utf-8')))\
-                           .replace("<re.Match object; span=(114, 131), match='",'').replace("'>",'')
-                           
-                           if "None" in Mac:
-                                print("[*] Mac-Address     ..............|-",Mac_Interface)
-                                if self.args.output :
-                                   printF = str("[*] Mac-Address     ..............|- "+Mac_Interface).strip()
-                                   with open (self.args.output,'a') as out_put :
+                           .replace("<re.Match object; span=(114, 131), match='",'').replace("'>",'')                          
+                           if "None" in Mac and  host_ip == Host :
+                                 print("[*] Mac-Address     ..............|-",Mac_Interface)
+                                 if self.args.output :
+                                    printF = str("[*] Mac-Address     ..............|- "+Mac_Interface).strip()
+                                    with open (self.args.output,'a') as out_put :
+                                         out_put.write(str(printF+"\n"))
+                                 interfaceMac = Mac_Interface[0:8].replace(":","").upper() 
+                           elif "None" in Mac and host_ip != Host :
+                                  print("[*] Mac-Address     ..............|- None")
+                                  if self.args.output :
+                                     printF = str("[*] Mac-Address     ..............|- None")
+                                     with open (self.args.output,'a') as out_put :
                                           out_put.write(str(printF+"\n"))
-                                interfaceMac = Mac_Interface[0:8].replace(":","").upper() 
+                                  interfaceMac = Mac_Interface[0:8].replace(":","").upper()
                            else:
                                    print("[*] Mac-Address     ..............|-",Mac)
                                    if self.args.output :  
@@ -131,11 +138,17 @@ class Host_One():
                               elif MacGET not  in line:
                                    vendor1 = " Unknown-MAC" 
                               count += 1  
-                           if "None" in Mac :
-                                print("[+] Mac-Vendor      --------------|  " +vendor)
-                                if  self.args.output :
-                                    printF = str("[+] Mac-Vendor      --------------|  " +vendor).strip()
-                                    with open(self.args.output ,"a") as out_put :
+                           if "None" in Mac and host_ip == Host :
+                                  print("[+] Mac-Vendor      --------------|  " +vendor)
+                                  if  self.args.output :
+                                      printF = str("[+] Mac-Vendor      --------------|  " +vendor).strip()
+                                      with open(self.args.output ,"a") as out_put :
+                                         out_put.write(str(printF+"\n"))
+                           elif "None" in Mac and host_ip != Host :
+                                  print("[+] Mac-Vendor      --------------|  None ")
+                                  if  self.args.output :
+                                     printF = str("[+] Mac-Vendor      --------------|  None")
+                                     with open(self.args.output ,"a") as out_put :
                                          out_put.write(str(printF+"\n"))
                            else: 
                                 print("[+] Mac-Vendor      --------------| " +vendor1)
@@ -148,7 +161,7 @@ class Host_One():
                               with open(self.args.output,"a") as out_put :
                                    out_put.write("\n")
                    else:
-                           print("[*] HOST  (",Host,")   -------------| Not response !!")
+                        print("[*] HOST  (",Host,")   -------------| Not response !!")
                            
                    print(Banner) 
                    if self.args.output:
