@@ -20,36 +20,32 @@ Mac_Get = Mac_Interface[0:8].replace(":","").upper()
 Macdb = open('Package/mac-vendor.txt', 'r')
 Mac = Macdb.readlines()
 try:
-    host_name  = socket.gethostname() 
-    host_ip    = str(check_output(['hostname', '--all-ip-addresses'],stderr=subprocess.PIPE)).\
-    replace("b'","").replace("'","").replace(" ","").replace("\\n","")
+      host_name  = socket.gethostname() 
+      host_ip    = str(check_output(['hostname', '--all-ip-addresses'],stderr=subprocess.PIPE)).\
+      replace("b'","").replace("'","").replace(" ","").replace("\\n","")
 except Exception :
-   if "/" in sys.argv[2]:
-       host_ip = sys.argv[2][:-3]
-   else:
-       host_ip = sys.argv[2]
+     if "/" in sys.argv[2]:
+         host_ip = sys.argv[2][:-3]
+     else:
+         host_ip = sys.argv[2]
 count = 0
 for line in Mac:
     line = line.strip()
     if Mac_Get in line  : 
-       vendor = line[7:].strip() 
-       break 
+         vendor = line[7:].strip() 
+         break 
     elif Mac_Get not  in line  : 
-          vendor = "Unknown-MAC" 
+         vendor = "Unknown-MAC" 
     count += 1
-    
-class RangeOfHosts :
-          
+class RangeOfHosts :       
       def __init__(self):
                self.args_command()
-               self.Ping_Range()            
-                
+               self.Ping_Range()                      
       def Ping_Range(self):
          try:     
              try:
                if self.args.network or (self.args.network and self.args.output)  :
                    if "/" not in self.args.network:
-               
                        print("\n"+"="*50+"\n"+"[*] Set the Subnet Netwotk...."+"\n"+"="*50+"\n")
                        exit()                 
                    Network     = ipaddress.ip_network('{}'.format(self.args.network), strict=False)
@@ -64,20 +60,20 @@ class RangeOfHosts :
                    oct_ip = ip.split('.')
                    start_ip = str(Network_ID).split(".") 
                    if (int(self.args.start)==int(start_ip[3])):
-                       print("\n"+"="*50+"\n"+"[+] Erorr       --------------|- Start Ip is Netwotk-ID "+"\n"+"="*50+"\n")
-                       exit()
+                           print("\n"+"="*50+"\n"+"[+] Erorr       --------------|- Start Ip is Netwotk-ID "+"\n"+"="*50+"\n")
+                           exit()
                    elif int(self.args.start) < int(self.args.end) and  (int(self.args.end) < int(end_ip[3])):
-                         total = int(self.args.end) - int(self.args.start)+1
+                           total = int(self.args.end) - int(self.args.start)+1
                    else:
-                      if  (int(self.args.end) > int(end_ip[3])):
-                          print("\n"+"="*50+"\n"+"[+] Erorr       --------------|- range ip out of Subnet-Mask "+"\n"+"="*50+"\n")
-                          exit()
-                      elif (int(self.args.end))== 255:
+                      if(int(self.args.end) > int(end_ip[3])):
+                           print("\n"+"="*50+"\n"+"[+] Erorr       --------------|- range ip out of Subnet-Mask "+"\n"+"="*50+"\n")
+                           exit()
+                      elif(int(self.args.end))== 255:
                            print("\n"+"="*50+"\n"+"[+] Erorr       --------------|-  end range is  broadcast  "+"\n"+"="*50+"\n")
                            exit()
                    if int(self.args.start) > 256 or int(self.args.end) > 256:
-                      print("\n"+"="*50+"\n"+"[+] Erorr       --------------|- Host-Count > 255 Hosts "+"\n"+"="*50+"\n")
-                      exit()
+                           print("\n"+"="*50+"\n"+"[+] Erorr       --------------|- Host-Count > 255 Hosts "+"\n"+"="*50+"\n")
+                           exit()
                    else:
                        pass  
                    print("\n[*] HOST INFO-\n"+"="*17+"\n")
@@ -114,7 +110,7 @@ class RangeOfHosts :
                          printF  += ("[+] Broadcast IP    --------------|- " +  str(Network.broadcast_address))+"\n"                   
                          printF  += ("\n"+"="*50+"\n"+"[*] Host-discover-"+"\n"+"="*20+"\n\n")
                          with open(self.args.output,"w+") as out_put:
-                            out_put.write(Banner+"\n"+printF)
+                              out_put.write(Banner+"\n"+printF)
                    Hcount = 0
                    dcount = 0
                    for Host_Num in range(int(self.args.start),int(self.args.end)+1) :                      
@@ -128,34 +124,37 @@ class RangeOfHosts :
                         if respons == 0:
                             Hcount +=1
                             print("[+] HOST OnLine     --------------| ",Host)
+                           
                             if self.args.output :
-                              printF = str("[+] HOST OnLine     --------------|  " + Host).strip()
-                              with  open (self.args.output,"a") as out_put :
-                                  out_put.write(printF+"\n")
+                                 printF = str("[+] HOST OnLine     --------------|  " + Host).strip()
+                                 with  open (self.args.output,"a") as out_put :
+                                    out_put.write(printF+"\n")
                             pid = Popen(["arp", "-n", Host], stdout=PIPE)
                             arp_host = pid.communicate()[0]
                             Mac = str(re.search(r"(([a-f\d]{1,2}\:){5}[a-f\d]{1,2})",arp_host.decode('utf-8')))\
-                            .replace("<re.Match object; span=(114, 131), match='",'').replace("'>",'')                           
+                            .replace("<re.Match object; span=(114, 131), match='",'').replace("'>",'')
+                            
                             if "None" in Mac and host_ip == Host :
                                  print("[*] Mac-Address     ..............|-",Mac_Interface)
                                  if self.args.output :
-                                    printF = str("[*] Mac-Address     ..............|- "+Mac_Interface).strip()
-                                    with open (self.args.output,'a') as out_put :
-                                         out_put.write(str(printF+"\n"))
-                                 interfaceMac = Mac_Interface[0:8].replace(":","").upper() 
+                                       printF = str("[*] Mac-Address     ..............|- "+Mac_Interface).strip()
+                                       with open (self.args.output,'a') as out_put :
+                                             out_put.write(str(printF+"\n"))
+                                 interfaceMac = Mac_Interface[0:8].replace(":","").upper()
+                                 
                             elif "None" in Mac and Host != host_ip :
                                   print("[*] Mac-Address     ..............|- None")
                                   if self.args.output :
-                                     printF = str("[*] Mac-Address     ..............|- None")
-                                     with open (self.args.output,'a') as out_put :
-                                          out_put.write(str(printF+"\n"))
+                                      printF = str("[*] Mac-Address     ..............|- None")
+                                      with open (self.args.output,'a') as out_put :
+                                           out_put.write(str(printF+"\n"))
                                   interfaceMac = Mac_Interface[0:8].replace(":","").upper()
                             else: 
-                                print("[*] Mac-Address     ..............|-",Mac)
-                                if self.args.output :  
-                                    printF = str("[*] Mac-Address     ..............|- "+Mac).strip()
-                                    with open (self.args.output,'a') as out_put :
-                                         out_put.write(str(printF+"\n"))
+                                  print("[*] Mac-Address     ..............|-",Mac)
+                                  if self.args.output :  
+                                      printF = str("[*] Mac-Address     ..............|- "+Mac).strip()
+                                      with open (self.args.output,'a') as out_put :
+                                           out_put.write(str(printF+"\n"))
                             MacGET= Mac[0:8].replace(":","").upper()
                             Macdb = open('Package/mac-vendor.txt', 'r')
                             MacFile = Macdb.readlines()
@@ -163,33 +162,35 @@ class RangeOfHosts :
                             for line in MacFile:
                                 line = line.strip()
                                 if MacGET in line  : 
-                                     vendor1 = line[7:].replace("    ","")  
-                                     break
+                                      vendor1 = line[7:].replace("    ","")  
+                                      break
                                 elif MacGET not  in line:
-                                     vendor1 = " Unknown-MAC" 
+                                      vendor1 = " Unknown-MAC" 
                                 count += 1  
+                                
                             if "None" in Mac and host_ip == Host :
                                   print("[+] Mac-Vendor      --------------|  " +vendor)
                                   if  self.args.output :
                                       printF = str("[+] Mac-Vendor      --------------|  " +vendor).strip()
                                       with open(self.args.output ,"a") as out_put :
                                          out_put.write(str(printF+"\n"))
+                                    
                             elif "None" in Mac and host_ip != Host :
                                   print("[+] Mac-Vendor      --------------|  None ")
                                   if  self.args.output :
-                                     printF = str("[+] Mac-Vendor      --------------|  None")
-                                     with open(self.args.output ,"a") as out_put :
-                                         out_put.write(str(printF+"\n"))
+                                      printF = str("[+] Mac-Vendor      --------------|  None")
+                                      with open(self.args.output ,"a") as out_put :
+                                          out_put.write(str(printF+"\n"))
                             else: 
                                   print("[+] Mac-Vendor      --------------| " +vendor1)
                                   if self.args.output :    
-                                     printF = str("[+] Mac-Vendor      --------------| " +vendor1).strip()
-                                     with open(self.args.output ,"a") as out_put :
-                                         out_put.write(str(printF+"\n"))           
+                                      printF = str("[+] Mac-Vendor      --------------| " +vendor1).strip()
+                                      with open(self.args.output ,"a") as out_put :
+                                          out_put.write(str(printF+"\n"))           
                             print()
                             if self.args.output:
-                                with open(self.args.output,"a") as out_put :
-                                    out_put.write("\n")
+                                  with open(self.args.output,"a") as out_put :
+                                      out_put.write("\n")
                         else:
                             dcount +=1
                             print("[+] TRY HOST        --------------| ",Host)
@@ -200,13 +201,13 @@ class RangeOfHosts :
                    print("[+] Total-Hosts      --------------|- " +  str(total ))
                    print("[+] Active Hosts     --------------|- " +  str(Hcount))
                    if dcount == 0:
-                      print("[+] Inactive Hosts   --------------|- " +  str(total))
+                       print("[+] Inactive Hosts   --------------|- " +  str(total))
                    else:
                        print("[+] Inactive Hosts   --------------|- " +  str(dcount))    
-                   stop = timeit.default_timer()
-                   sec = stop  - start
+                   stop     = timeit.default_timer()
+                   sec      = stop  - start
                    fix_time = time.gmtime(sec)
-                   result = time.strftime("%H:%M:%S",fix_time)  
+                   result   = time.strftime("%H:%M:%S",fix_time)  
                    print("[+] Run-Time         --------------|- " +  result) 
                     
                    print(Banner) 
@@ -216,21 +217,21 @@ class RangeOfHosts :
                         printF  += ("[+] Total-Hosts     --------------|- " +  str(total ))+"\n"
                         printF  += ("[+] Active Hosts    --------------|- " +  str(Hcount))+"\n"  
                         if dcount == 0 :
-                            printF  += ("[+] Inactive Hosts  --------------|- " +  str(total))+"\n"
-                            printF  += ("[+] Run-Time        --------------|- " +  str(result))+"\n"
+                             printF  += ("[+] Inactive Hosts  --------------|- " +  str(total))+"\n"
+                             printF  += ("[+] Run-Time        --------------|- " +  str(result))+"\n"
                         else:
-                            printF  += ("[+] Inactive Hosts  --------------|- " +  str(dcount))+"\n"
-                            printF  += ("[+] Run-Time        --------------|- " +  str(result))+"\n"
+                             printF  += ("[+] Inactive Hosts  --------------|- " +  str(dcount))+"\n"
+                             printF  += ("[+] Run-Time        --------------|- " +  str(result))+"\n"
                         with open(self.args.output,'a') as out_put :
                              out_put.write(printF+Banner)
                    
              except Exception:
                   print("\n"+"="*50+"\n"+"[*] HOST (",self.args.network,")   -------------| ValueError"+"\n"+"="*50+"\n")
          except KeyboardInterrupt:
-                print(Banner)
-                if self.args.output:
-                   with open(self.args.output,'a') as out_put :
-                        out_put.write(Banner)
+                  print(Banner)
+                  if self.args.output:
+                      with open(self.args.output,'a') as out_put :
+                           out_put.write(Banner)
       def args_command(self):
               parser = argparse.ArgumentParser( description="Usage: <OPtion> <arguments> ")
               parser.add_argument( '-N',"--network"   ,metavar='' , action=None ) 
