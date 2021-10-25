@@ -139,7 +139,7 @@ class Discover_Network():
                            count = 0
                            
                            for line in MacFile:
-                                    line = line.strip()
+                               line = line.strip()
                                if MacGET in line  : 
                                     vendor1 = line[7:].replace("    ","")  
                                     break
@@ -204,7 +204,7 @@ class Discover_Network():
          except KeyboardInterrupt:
                 print(Banner)
                 if self.args.output:
-                with open(self.args.output,'a') as out_put :
+                   with open(self.args.output,'a') as out_put :
                       out_put.write(Banner)
                 
       def args_command(self):

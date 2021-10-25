@@ -125,49 +125,51 @@ class Host_One():
                                   with open (self.args.output,'a') as out_put :
                                         out_put.write(str(printF+"\n"))
                                   interfaceMac = Mac_Interface[0:8].replace(":","").upper()
-                                  
+                                 
                          else:
                                print("[*] Mac-Address     ..............|-",Mac)
                                if self.args.output :  
                                   printF = str("[*] Mac-Address     ..............|- "+Mac).strip()
                                   with open (self.args.output,'a') as out_put :
                                         out_put.write(str(printF+"\n"))
-                                 
+                                        
                          MacGET= Mac[0:8].replace(":","").upper()
                          Macdb = open('Package/mac-vendor.txt', 'r')
                          MacFile = Macdb.readlines()
+
                          count = 0
                          for line in MacFile:
-                              line = line.strip()
-                              if MacGET in line  : 
+                               line = line.strip()
+                               if MacGET in line  : 
                                    vendor1 = line[7:].replace("    ","")  
                                    break
-                              elif MacGET not  in line:
+                               elif MacGET not  in line:
                                       vendor1 = " Unknown-MAC" 
-                              count += 1  
-                              if "None" in Mac and host_ip == Host :
-                                   print("[+] Mac-Vendor      --------------|  " +vendor)
-                                   if self.args.output :
-                                      printF = str("[+] Mac-Vendor      --------------|  " +vendor).strip()
-                                      with open(self.args.output ,"a") as out_put :
-                                          out_put.write(str(printF+"\n"))
+                               count += 1
+  
+                         if "None" in Mac and host_ip == Host :
+                               print("[+] Mac-Vendor      --------------|  " +vendor)
+                               if self.args.output :
+                                  printF = str("[+] Mac-Vendor      --------------|  " +vendor).strip()
+                                  with open(self.args.output ,"a") as out_put :
+                                       out_put.write(str(printF+"\n"))
                                       
-                              elif "None" in Mac and host_ip != Host :
-                                   print("[+] Mac-Vendor      --------------|  None ")
-                                   if self.args.output :
-                                      printF = str("[+] Mac-Vendor      --------------|  None")
-                                      with open(self.args.output ,"a") as out_put :
-                                          out_put.write(str(printF+"\n"))
-                              else: 
-                                   print("[+] Mac-Vendor      --------------| " +vendor1)
-                                   if self.args.output :    
-                                      printF = str("[+] Mac-Vendor      --------------| " +vendor1).strip()
-                                      with open(self.args.output ,"a") as out_put :
-                                          out_put.write(str(printF+"\n"))           
+                         elif "None" in Mac and host_ip != Host :
+                               print("[+] Mac-Vendor      --------------|  None ")
+                               if self.args.output :
+                                  printF = str("[+] Mac-Vendor      --------------|  None")
+                                  with open(self.args.output ,"a") as out_put :
+                                       out_put.write(str(printF+"\n"))
+                         else: 
+                               print("[+] Mac-Vendor      --------------| " +vendor1)
+                               if self.args.output :    
+                                  printF = str("[+] Mac-Vendor      --------------| " +vendor1).strip()
+                                  with open(self.args.output ,"a") as out_put :
+                                        out_put.write(str(printF+"\n"))           
                          print()
                          if self.args.output:
-                             with open(self.args.output,"a") as out_put :
-                                   out_put.write("\n")
+                               with open(self.args.output,"a") as out_put :
+                                    out_put.write("\n")
                    else:
                          print("[*] HOST  (",Host,")   -------------| Not response !!")      
                    print(Banner) 
