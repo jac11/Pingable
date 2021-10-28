@@ -11,34 +11,24 @@ from subprocess import Popen, PIPE, check_output
 from Package.Banner import * 
 import subprocess
  
-Mac_Interface = ':'.join(re.findall('..', '%012x' % uuid.getnode())) 
-Mac_Get = Mac_Interface[0:8].replace(":","").upper()
-Macdb = open('Package/mac-vendor.txt', 'r')
-Mac = Macdb.readlines()
 
 try:
     host_name  = socket.gethostname() 
     host_ip    = str(check_output(['hostname', '--all-ip-addresses'],stderr=subprocess.PIPE)).\
     replace("b'","").replace("'","").replace("\\n","")
-    if  " " in host_ip : 
-        host_ip = host_ip.split()       
-        host_ip = host_ip[-1]
+    if  host_ip in str(ipaddress.ip_network(self.args.network), strict=False):
+          pass
+    else:
+        if  " " in host_ip : 
+            host_ip = host_ip.split()       
+            host_ip = host_ip[-1]
 except Exception :
     if "/" in sys.argv[2]:
          host_ip = sys.argv[2][:-3]
     else:
          host_ip = sys.argv[2]
      
-count = 0
-for line in Mac:
-    line = line.strip()
-    if Mac_Get in line  : 
-         vendor = line[7:].strip() 
-         break 
-    elif Mac_Get not  in line  : 
-         vendor = "Unknown-MAC"
-    count += 1
-    
+
 class Host_One():
           
         def __init__(self):
@@ -52,6 +42,36 @@ class Host_One():
                       Network_ID  = Network.network_address
                       SubNet      = Network.netmask
                       Hosts_range = Network.num_addresses - 2 
+                      Mac_Interface = ':'.join(re.findall('..', '%012x' % uuid.getnode())) 
+                      Mac_Get = Mac_Interface[0:8].replace(":","").upper()
+                      Macdb = open('Package/mac-vendor.txt', 'r')
+                      Mac = Macdb.readlines()
+                      try:
+                         host_name  = socket.gethostname() 
+                         host_ip    = str(check_output(['hostname', '--all-ip-addresses'],stderr=subprocess.PIPE)).\
+                         replace("b'","").replace("'","").replace("\\n","")
+                         Network1 = str(Network )
+                         if  " " in host_ip : 
+                             host_ip = host_ip.split()
+                             host_ip_0 = str(host_ip[0])
+                             if ipaddress.ip_address(host_ip_0) in ipaddress.ip_network(Network1):              
+                                host_ip = host_ip_0
+                             else:                         
+                                host_ip = str(host_ip[-1])
+                      except Exception :
+                           if "/" in sys.argv[2]:
+                               host_ip = sys.argv[2][:-3]
+                           else:
+                              host_ip = sys.argv[2]
+                      count = 0
+                      for line in Mac:
+                          line = line.strip()
+                          if Mac_Get in line  : 
+                             vendor = line[7:].strip() 
+                             break 
+                          elif Mac_Get not  in line  : 
+                             vendor = "Unknown-MAC"
+                          count += 1
                       print("\n[*] HOST INFO-\n"+"="*14+"\n")
                       print("[+] HOST-IP         --------------|- " +  host_ip )
                       print("[+] Mac-Address     --------------|- " +  Mac_Interface)

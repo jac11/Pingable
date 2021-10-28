@@ -12,53 +12,57 @@ from Package.Banner import *
 import subprocess 
 import timeit,time
 
-
-command_argv = str(" ".join(sys.argv))
-start = timeit.default_timer()
-Mac_Interface = ':'.join(re.findall('..', '%012x' % uuid.getnode())) 
-Mac_Get = Mac_Interface[0:8].replace(":","").upper()
-Macdb = open('Package/mac-vendor.txt', 'r')
-Mac = Macdb.readlines()
-
-try:
-   host_name  = socket.gethostname() 
-   host_ip    = str(check_output(['hostname', '--all-ip-addresses'],stderr=subprocess.PIPE)).\
-   replace("b'","").replace("'","").replace("\\n","")
-   if  " " in host_ip : 
-       host_ip = host_ip.split()       
-       host_ip = host_ip[-1]
-except Exception :
-    if "/" in sys.argv[2]:
-       host_ip = sys.argv[2][:-3]
-    else:
-       host_ip = sys.argv[2] 
-count = 0
-
-for line in Mac:
-    line = line.strip()
-    if Mac_Get in line  : 
-       vendor = line[7:].strip() 
-       break 
-    elif Mac_Get not  in line  : 
-          vendor = "Unknown-MAC" 
-    count += 1
-    
+   
 class Discover_Network():
           
-      def __init__(self):
+    def __init__(self):
           self.args_command()
           self.Ping_command()                  
-      def Ping_command(self):
-         try:      
-             try:
+    def Ping_command(self):
+       try:      
+           try:
+               start = timeit.default_timer()
+               Network     = ipaddress.ip_network('{}'.format(self.args.network), strict=False)
+               Network_ID  = Network.network_address
+               SubNet      = Network.netmask
+               Hosts_range = Network.num_addresses - 2 
+               scop   = "/"
+               Network  = ipaddress.ip_network('{}{}{}'.format(Network_ID,scop,self.args.network[-2:]))
+               command_argv = str(" ".join(sys.argv))       
+               Mac_Interface = ':'.join(re.findall('..', '%012x' % uuid.getnode())) 
+               Mac_Get = Mac_Interface[0:8].replace(":","").upper()
+               Macdb = open('Package/mac-vendor.txt', 'r')
+               Mac = Macdb.readlines()               
+               try:
+                  host_name  = socket.gethostname() 
+                  host_ip    = str(check_output(['hostname', '--all-ip-addresses'],stderr=subprocess.PIPE)).\
+                  replace("b'","").replace("'","").replace("\\n","")
+                  Network1 = str(Network )
+                  if  " " in host_ip : 
+                     host_ip = host_ip.split()
+                     host_ip_0 = str(host_ip[0])
+                     if ipaddress.ip_address(host_ip_0) in ipaddress.ip_network(Network1):              
+                         host_ip = host_ip_0
+                     else:                         
+                         host_ip = str(host_ip[-1])
+               except Exception :
+                      if "/" in sys.argv[2]:
+                         host_ip = sys.argv[2][:-3]
+                      else:
+                         host_ip = sys.argv[2] 
+               count = 0
+               for line in Mac :
+                    line = line.strip()
+                    if Mac_Get in line  : 
+                          vendor = line[7:].strip() 
+                          break 
+                    elif Mac_Get not  in line  : 
+                         vendor = "Unknown-MAC" 
+               count += 1
                if self.args.network or (self.args.network and self.args.output) :
                    if "/" not in self.args.network:
                        print("\n"+"="*50+"\n"+"[*] Set the Subnet Netwotk...."+"\n"+"="*50+"\n")
-                       exit()
-                   Network     = ipaddress.ip_network('{}'.format(self.args.network), strict=False)
-                   Network_ID  = Network.network_address
-                   SubNet      = Network.netmask
-                   Hosts_range = Network.num_addresses - 2 
+                       exit()              
                    print("\n[*] HOST INFO-\n"+"="*14+"\n")
                    print("[+] HOST-IP         --------------|- " +  host_ip)
                    print("[+] Mac-Address     --------------|- " +  Mac_Interface)
@@ -201,24 +205,24 @@ class Discover_Network():
                       with open(self.args.output,'a') as out_put :
                           out_put.write(printF+Banner)
                         
-             except Exception:
-                    print("\n"+"="*50+"\n"+"[*] HOST (",self.args.network,")   -------------| ValueError"+"\n"+"="*50+"\n")
-         except KeyboardInterrupt:
-                print(Banner)
-                if self.args.output:
-                   with open(self.args.output,'a') as out_put :
-                      out_put.write(Banner)
+           except Exception:
+                  print("\n"+"="*50+"\n"+"[*] HOST (",self.args.network,")   -------------| ValueError"+"\n"+"="*50+"\n")
+       except KeyboardInterrupt:
+               print(Banner)
+               if self.args.output:
+                  with open(self.args.output,'a') as out_put :
+                     out_put.write(Banner)
                 
-      def args_command(self):
-              parser = argparse.ArgumentParser( description="Usage: <OPtion> <arguments> ")
-              parser.add_argument( '-N',"--network"   ,metavar='' , action=None  )
-              parser.add_argument( '-O',"--output"   ,metavar='' , action=None  )
-              self.args = parser.parse_args()
-              if len(sys.argv)> 1 :
-                   pass
-              else:
-                   parser.print_help()
-                   exit()                                        
+    def args_command(self):
+            parser = argparse.ArgumentParser( description="Usage: <OPtion> <arguments> ")
+            parser.add_argument( '-N',"--network"   ,metavar='' , action=None  )
+            parser.add_argument( '-O',"--output"   ,metavar='' , action=None  )
+            self.args = parser.parse_args()
+            if len(sys.argv)> 1 :
+                 pass
+            else:
+                 parser.print_help()
+                 exit()                                        
        
 if __name__=="__main__":
    Discover_Network()
