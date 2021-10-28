@@ -20,12 +20,9 @@ try:
     host_name  = socket.gethostname() 
     host_ip    = str(check_output(['hostname', '--all-ip-addresses'],stderr=subprocess.PIPE)).\
     replace("b'","").replace("'","").replace("\\n","")
-    if  host_ip in str(ipaddress.ip_network(self.args.network), strict=False):
-          pass
-    else:
-        if  " " in host_ip : 
-            host_ip = host_ip.split()       
-            host_ip = host_ip[-1]
+    if  " " in host_ip : 
+        host_ip = host_ip.split()       
+        host_ip = host_ip[-1]
 except Exception :
     if "/" in sys.argv[2]:
          host_ip = sys.argv[2][:-3]
