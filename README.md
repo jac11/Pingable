@@ -17,6 +17,7 @@ if the firewall is set to drop the ICMP packet so you can not discover the host 
  * chmod +x Pingable.py
  * to display help minue type ./Pingable -h
  ```
+
  ______ _                   _     _       
 (_____ (_)                 | |   | |      
  _____) ) ____   ____  ____| | _ | | ____ 
@@ -25,17 +26,43 @@ if the firewall is set to drop the ICMP packet so you can not discover the host 
 |_|    |_|_| |_|\_|| |\_||_|____/|_|\____)
                (_____|by:jacstory                    
 
-usage: Pingable.py [-h] [-N] [-H] [-O] [-S] [-E]
+usage: Pingable.py [-h] [-N] [-O] [-S] [-H] [-E]
 
 Usage: <OPtion> <arguments>
 
 optional arguments:
   -h, --help       show this help message and exit
-  -N , --network   ping all Network ,IPaddress/subnet
-  -H , --Host      Ping One Host Only
+  -N , --network   ping all Network ,IPaddress/prefix
   -O , --output    output file report
   -S , --start     start of the range Ips
+  -H , --Host      Ping One Host Only
   -E , --end       end of the range ips
+===============
+Example:-
+==========
+-To Scan all Subnet Use -N <network/prefix>
+./Pingalbe.py -N 10.195.100.200/25
+		====================
+-To Scan range of ips Use -N <network/prefix> -S <Start>  -E <end>
+./Pingalbe.py -N 10.195.100.200/24 -S 240 -E 254 
+		====================
+-To Scan one Host  Use  '-H' <host ip>
+./Pingalbe.py -H 10.195.100.200/25 
+or
+./pingable.py -H 10.196.100.3
+		====================
+-To Save the output into file Use -O <file name>
+./Pingalbe -N 10.195.100.200/24 -S 240 -E 254 -O report.txt
+
+ ______ _                   _     _       
+(_____ (_)                 | |   | |      
+ _____) ) ____   ____  ____| | _ | | ____ 
+|  ____/ |  _ \ / _  |/ _  | || \| |/ _  )
+| |    | | | | ( ( | ( ( | | |_) ) ( (/ / 
+|_|    |_|_| |_|\_|| |\_||_|____/|_|\____)
+               (_____|by:jacstory                    
+
+
 ```
 * for ping all subnet use -N or --Network with subnet ./Pingable.py -N 192.168.1.22/24 use your LAN IP address with Subnet Mask
 * to ping one Host Use -H or --Host ./Pingable -H 10.195.100.2/24 or 10.195.100.2
