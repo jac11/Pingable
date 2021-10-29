@@ -1,3 +1,6 @@
+#!/usr/bin/env python3 
+
+import argparse
 import sys
 from Package.Banner import *
 class Run :
@@ -36,18 +39,16 @@ class Run :
                    parser.print_help()
                    print("="*15)
                    print("Example:-"+"\n"+"="*10)
-                   print("-To Scan all Subnet Use\n./Pingable.py -N  <network/prefix> \n./Pingalbe -N 10.195.100.200/25")               
+                   print("-To Scan all Subnet Use -N <network/prefix>\n./Pingalbe.py -N 10.195.100.200/25")               
                    print("\t\t"+"="*20)
-                   print("-To Scan range of ips Use\n./pingable.py -N  <network/prefix> '-S' <Start>  -E <end>\n./Pingalbe.py -N 10.195.100.200/24 -S 240 -E 254 ")               
+                   print("-To Scan range of ips Use -N <network/prefix> -S <Start>  -E <end>\n./Pingalbe.py -N 10.195.100.200/24 -S 240 -E 254 ")               
                    print("\t\t"+"="*20)
-                   print("-To Scan one Host  Use  '-H' <host ip>\n./Pingalbe.py -H 10.195.100.200/25 \nor\n./pingable.py -H 10.196.100.3")
-                   print("\t\t"+"="*20)           
-                   print("-To  save output into file Use -O <file name>")
-                   print("./Pingalbe.py -N 10.195.100.200/24 -S 240 -E 254 -O report.txt")                
+                   print("-To Scan one Host  Use  '-H' <host ip>\n./Pingalbe.py -H 10.195.100.200/25 \nor\n./pingable.py -H 10.196.100.3")               
+                   print("-To Save the output into file Use -O <file name>")
+                   print("./Pingalbe -N 10.195.100.200/24 -S 240 -E 254 -O report.txt") 
                    print(Banner)
                    exit()
 
 if __name__=="__main__":
    Run()
-
 
