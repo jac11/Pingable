@@ -41,10 +41,23 @@ class Discover_Network():
                   if  " " in host_ip : 
                      host_ip = host_ip.split()
                      host_ip_0 = str(host_ip[0])
+            
                      if ipaddress.ip_address(host_ip_0) in ipaddress.ip_network(Network1):              
                          host_ip = host_ip_0
+                         command  = "ifconfig | grep 'ether'"
+                         Macdb = subprocess.check_output (command,shell=True).decode('utf-8')
+                         Macaddr = re.compile(r'(?:[0-9a-fA-F]:?){12}')
+                         FMac = re.findall(Macaddr ,Macdb)
+                         Mac_Interface = str("".join(FMac[0]))
+                         Mac_Get = Mac_Interface[0:8].replace(":","").upper()
                      else:                         
                          host_ip = str(host_ip[-1])
+                         command  = "ifconfig | grep 'ether'"
+                         Macdb = subprocess.check_output (command,shell=True).decode('utf-8')
+                         Macaddr = re.compile(r'(?:[0-9a-fA-F]:?){12}')
+                         FMac = re.findall(Macaddr ,Macdb)
+                         Mac_Interface = str("".join(FMac[-1]))
+                         Mac_Get = Mac_Interface[0:8].replace(":","").upper()
                except Exception :
                       if "/" in sys.argv[2]:
                          host_ip = sys.argv[2][:-3]
