@@ -125,12 +125,12 @@ class Discover_Network():
                              printF = str("[+] HOST OnLine     --------------|  " + Host).strip()
                              with  open (self.args.output,"a") as out_put :
                                  out_put.write(printF+"\n")
-                           pid = Popen(["arp", "-n", Host], stdout=PIPE)
-                           arp_host = pid.communicate()[0]
-                           Mac = str(re.search(r"(([a-f\d]{1,2}\:){5}[a-f\d]{1,2})",arp_host.decode('utf-8')))\
-                           .replace("<re.Match object; span=(114, 131), match='",'').replace("'>",'')    
-                           
-                           if "None" in Mac and str(ipaddress.ip_address(Host)) ==  str(ipaddress.ip_address(host_ip)) :
+                           pid = Popen(["arp", "-a", Host], stdout=PIPE)
+                           arp_host = pid.communicate()[0]                          
+                           Mac_arp = str(arp_host)
+                           Macaddr = re.compile(r'(?:[0-9a-fA-F]:?){12}')
+                           Mac = str(re.findall(Macaddr ,Mac_arp)).replace("['",'').replace("']","")
+                           if "no match found" in Mac_arp and str(ipaddress.ip_address(Host)) ==  str(ipaddress.ip_address(host_ip)) :
                                   print("[*] Mac-Address     ..............|-",Mac_Interface)
                                   if self.args.output :
                                       printF = str("[*] Mac-Address     ..............|- "+Mac_Interface).strip()
@@ -138,7 +138,7 @@ class Discover_Network():
                                            out_put.write(str(printF+"\n"))
                                   interfaceMac = Mac_Interface[0:8].replace(":","").upper() 
                                  
-                           elif "None" in Mac and str(ipaddress.ip_address(Host)) != str(ipaddress.ip_address(host_ip)) :                     
+                           elif "no match found" in Mac_arp and str(ipaddress.ip_address(Host)) != str(ipaddress.ip_address(host_ip)) :                     
                                   print("[*] Mac-Address     ..............|- None")
                                   if self.args.output :
                                       printF = str("[*] Mac-Address     ..............|- None")
@@ -147,12 +147,12 @@ class Discover_Network():
                                   interfaceMac = Mac_Interface[0:8].replace(":","").upper()
                                   
                            else:
-                                  print("[*] Mac-Address     ..............|-",Mac)
+                                  print("[*] Mac-Address     ..............|-","".join(Mac))
                                   if self.args.output :  
                                       printF = str("[*] Mac-Address     ..............|- "+Mac).strip()
                                       with open (self.args.output,'a') as out_put :
                                            out_put.write(str(printF+"\n"))
-                           MacGET= Mac[0:8].replace(":","").upper()
+                           MacGET= str("".join(Mac[0:8])).replace(":","").upper()
                            Macdb = open('Package/mac-vendor.txt', 'r')
                            MacFile = Macdb.readlines()
                            count = 0
@@ -166,14 +166,14 @@ class Discover_Network():
                                     vendor1 = " Unknown-MAC" 
                                count += 1  
                                
-                           if "None" in Mac and str(ipaddress.ip_address(Host)) ==  str(ipaddress.ip_address(host_ip)) : 
+                           if "no match found" in Mac_arp and str(ipaddress.ip_address(Host)) ==  str(ipaddress.ip_address(host_ip)) : 
                                    print("[+] Mac-Vendor      --------------|  " +vendor)
                                    if  self.args.output :
                                         printF = str("[+] Mac-Vendor      --------------|  " +vendor).strip()
                                         with open(self.args.output ,"a") as out_put :
                                             out_put.write(str(printF+"\n"))
                                    
-                           elif "None" in Mac and str(ipaddress.ip_address(Host)) != str(ipaddress.ip_address(host_ip)) :
+                           elif "no match found" in Mac_arp and str(ipaddress.ip_address(Host)) != str(ipaddress.ip_address(host_ip)) :
                                    print("[+] Mac-Vendor      --------------|  None ")
                                    if  self.args.output :
                                         printF = str("[+] Mac-Vendor      --------------|  None")

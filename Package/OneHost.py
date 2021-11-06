@@ -139,12 +139,12 @@ class Host_One():
                              printF = str("[+] HOST OnLine     --------------|  " + Host).strip()
                              with  open (self.args.output,"a") as out_put :
                                   out_put.write(printF+"\n")
-                         pid = Popen(["arp", "-n", Host], stdout=PIPE)
+                         pid = Popen(["arp", "-a", Host], stdout=PIPE)
                          arp_host = pid.communicate()[0]
-                         Mac = str(re.search(r"(([a-f\d]{1,2}\:){5}[a-f\d]{1,2})",arp_host.decode('utf-8')))\
-                         .replace("<re.Match object; span=(114, 131), match='",'').replace("'>",'')
-                         
-                         if "None" in Mac and  host_ip == Host :
+                         Mac_arp = str(arp_host)
+                         Macaddr = re.compile(r'(?:[0-9a-fA-F]:?){12}')
+                         Mac = str(re.findall(Macaddr ,Mac_arp)).replace("['",'').replace("']","")
+                         if "no match found" in Mac_arp and  host_ip == Host :
                                print("[*] Mac-Address     ..............|-",Mac_Interface)
                                if self.args.output :
                                   printF = str("[*] Mac-Address     ..............|- "+Mac_Interface).strip()
@@ -152,7 +152,7 @@ class Host_One():
                                         out_put.write(str(printF+"\n"))
                                interfaceMac = Mac_Interface[0:8].replace(":","").upper()
                                  
-                         elif "None" in Mac and host_ip != Host :
+                         elif "no match found" in Mac_arp and host_ip != Host :
                                print("[*] Mac-Address     ..............|- None")
                                if self.args.output :
                                   printF = str("[*] Mac-Address     ..............|- None")
