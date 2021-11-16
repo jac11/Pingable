@@ -19,7 +19,7 @@ class Discover_Network():
           self.args_command()
           self.Ping_command()                  
     def Ping_command(self):
-       try:      
+         
            try:
                start = timeit.default_timer()
                Network     = ipaddress.ip_network('{}'.format(self.args.network), strict=False)
@@ -27,7 +27,10 @@ class Discover_Network():
                SubNet      = Network.netmask
                Hosts_range = Network.num_addresses - 2 
                scop   = "/"
-               Network  = ipaddress.ip_network('{}{}{}'.format(Network_ID,scop,self.args.network[-2:]))
+               try: 
+                   Network  = ipaddress.ip_network('{}{}{}'.format(Network_ID,scop,self.args.network[-2:]))
+               except Exception :
+                     Network  = ipaddress.ip_network('{}{}{}'.format(Network_ID,scop,self.args.network[-1:]))
                command_argv = str(" ".join(sys.argv))       
                Mac_Interface = ':'.join(re.findall('..', '%012x' % uuid.getnode())) 
                Mac_Get = Mac_Interface[0:8].replace(":","").upper()
@@ -82,7 +85,10 @@ class Discover_Network():
                    print("[+] Mac-Vendor      --------------|- " + vendor)
                    print("\n[*] NETWORK INFO-\n"+"="*14+"\n")
                    print("[+] Network-ID      --------------|- " +  str(Network_ID))
-                   print("[+] NetWork-Prefix  --------------|- " +  self.args.network[-2:])
+                   if "/" in self.args.network[-2:] :
+                        print("[+] NetWork-Prefix  --------------|- " +  self.args.network[-1:])
+                   else:
+                       print("[+] NetWork-Prefix  --------------|- " +  self.args.network[-2:])
                    print("[+] Subnet-Mask     --------------|- " +  str(SubNet))
                    print("[+] Start ip        --------------|- " +  str([ x for x in Network.hosts()][0]))
                    print("[+] Last ip         --------------|- " +  str([ x for  x  in  Network.hosts()][-1]))
@@ -98,7 +104,10 @@ class Discover_Network():
                          printF  += ("[+] Mac-Vendor      --------------|- " + vendor)+"\n"
                          printF  += ("\n[*] NETWIRK INFO-\n"+"="*14+"\n")+"\n"
                          printF  += ("[+] Network-ID      --------------|- " +  str(Network_ID))+"\n"
-                         printF  += ("[+] NetWork-Prefix  --------------|- " +  self.args.network[-2:])+"\n"
+                         if "/"in self.args.network[-2:]:
+                              printF  += ("[+] NetWork-Prefix  --------------|- " +  self.args.network[-1:])+"\n"
+                         else:
+                             printF  += ("[+] NetWork-Prefix  --------------|- " +  self.args.network[-2:])+"\n"
                          printF  += ("[+] Subnet-Mask     --------------|- " +  str(SubNet))+"\n"
                          printF  += ("[+] Start ip        --------------|- " +  str([ x for x in Network.hosts()][0]))+"\n"
                          printF  += ("[+] Last ip         --------------|- " +  str([ x for  x  in  Network.hosts()][-1]))+"\n"
@@ -106,10 +115,7 @@ class Discover_Network():
                          printF  += ("[+] Broadcast IP    --------------|- " +  str(Network.broadcast_address))+"\n"
                          printF  += ("\n"+"="*50+"\n"+"[*] Host-discover-"+"\n"+"="*20+"\n\n")
                          with open(self.args.output,"w+") as out_put:
-                             out_put.write(Banner+"\n"+printF)
-                           
-                   scop   = "/"
-                   Network  = ipaddress.ip_network('{}{}{}'.format(Network_ID,scop,self.args.network[-2:]))
+                             out_put.write(Banner+"\n"+printF)                           
                    Hcount = 0
                    dcount = 0
                    for Host in Network .hosts():
@@ -219,8 +225,8 @@ class Discover_Network():
                           out_put.write(printF+Banner)
                         
            except Exception:
-                  print("\n"+"="*50+"\n"+"[*] HOST (",self.args.network,")   -------------| ValueError"+"\n"+"="*50+"\n")
-       except KeyboardInterrupt:
+                 print("\n"+"="*50+"\n"+"[*] HOST (",self.args.network,")   -------------| ValueError"+"\n"+"="*50+"\n")
+           except KeyboardInterrupt:
                print(Banner)
                if self.args.output:
                   with open(self.args.output,'a') as out_put :

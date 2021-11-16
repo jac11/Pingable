@@ -18,7 +18,7 @@ class RangeOfHosts :
                self.args_command()
                self.Ping_Range()                      
       def Ping_Range(self):
-         try:     
+            
              try:
                if self.args.network or (self.args.network and self.args.output)  :
                    if "/" not in self.args.network:
@@ -30,7 +30,10 @@ class RangeOfHosts :
                    Hosts_range = Network.num_addresses - 2 
                    end_ip = str(Network.broadcast_address).split('.')
                    scop   = "/"
-                   NetworkID = ipaddress.ip_network('{}{}{}'.format(Network_ID,scop,self.args.network[-2:]))   
+                   try :
+                       NetworkID = ipaddress.ip_network('{}{}{}'.format(Network_ID,scop,self.args.network[-2:])) 
+                   except Exception :
+                        NetworkID = ipaddress.ip_network('{}{}{}'.format(Network_ID,scop,self.args.network[-1:]))
                    fix  = self.args.network
                    ip,sub = fix.split('/')
                    oct_ip = ip.split('.')
@@ -103,7 +106,10 @@ class RangeOfHosts :
                    print("[+] Mac-Vendor      --------------|- " + vendor)
                    print("\n[*] NETWORK INFO-\n"+"="*17+"\n")
                    print("[+] Network-ID      --------------|- " +  str(Network_ID))
-                   print("[+] NetWork-Prefix  --------------|- " +  self.args.network[-2:])
+                   if "/" in self.args.network[-2:] :
+                        print("[+] NetWork-Prefix  --------------|- " +  self.args.network[-1:])
+                   else:
+                       print("[+] NetWork-Prefix  --------------|- " +  self.args.network[-2:]))
                    print("[+] Subnet-Mask     --------------|- " +  str(SubNet))
                    print("[+] Frist ip        --------------|- " +  str([ x for x in Network.hosts()][0]))
                    print("[+] Last ip         --------------|- " +  str([ x for  x  in  Network.hosts()][-1]))
@@ -123,7 +129,10 @@ class RangeOfHosts :
                          printF  += ("[+] Mac-Vendor      --------------|- " + vendor)+"\n"
                          printF  += ("\n[*] NETWIRK INFO-\n"+"="*17+"\n")+"\n"
                          printF  += ("[+] Network-ID      --------------|- " +  str(Network_ID))+"\n"
-                         printF  += ("[+] NetWork-Prefix  --------------|- " +  self.args.network[-2:])+"\n"
+                         if "/"in self.args.network[-2:]:
+                              printF  += ("[+] NetWork-Prefix  --------------|- " +  self.args.network[-1:])+"\n"
+                         else:
+                             printF  += ("[+] NetWork-Prefix  --------------|- " +  self.args.network[-2:])+"\n"
                          printF  += ("[+] Subnet-Mask     --------------|- " +  str(SubNet))+"\n"
                          printF  += ("[+] Start ip        --------------|- " +  str([ x for x in Network.hosts()][0]))+"\n"
                          printF  += ("[+] Last ip         --------------|- " +  str([ x for  x  in  Network.hosts()][-1]))+"\n"
@@ -249,7 +258,7 @@ class RangeOfHosts :
                    
              except Exception:
                   print("\n"+"="*50+"\n"+"[*] HOST (",self.args.network,")   -------------| ValueError"+"\n"+"="*50+"\n")
-         except KeyboardInterrupt:
+             except KeyboardInterrupt:
                   print(Banner)
                   if self.args.output:
                       with open(self.args.output,'a') as out_put :

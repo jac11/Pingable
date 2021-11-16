@@ -35,7 +35,7 @@ class Host_One():
            self.args_command()
            self.Ping_command()                 
         def Ping_command(self):
-            try:
+            
                try:
                    if self.args.Host or (self.args.Host and self.args.output) :
                       Network     = ipaddress.ip_network('{}'.format(self.args.Host), strict=False)
@@ -93,7 +93,10 @@ class Host_One():
                       if "/" not in self.args.Host:
                            print("[+] NetWork-Prefix  --------------|- 32")
                       else:
-                           print("[+] NetWork-Prefix  --------------|- " + str(self.args.Host[-2:]))
+                           if "/" in self.args.Host[-2:]:
+                               print("[+] NetWork-Prefix  --------------|- " + str(self.args.Host[-1:]))
+                           else:
+                                print("[+] NetWork-Prefix  --------------|- " + str(self.args.Host[-2:]))
                       print("[+] Subnet-Mask     --------------|- " +  str(SubNet))
                       print("[+] Start ip        --------------|- " +  str([ x for x in Network.hosts()][0]))
                       print("[+] Last ip         --------------|- " +  str([ x for  x  in  Network.hosts()][-1]))
@@ -115,7 +118,10 @@ class Host_One():
                            if "/" not in self.args.Host:
                                printF +=("[+] NetWork-Prefix  --------------|- 32")+"\n"
                            else:
-                               printF  +=("[+] NetWork-Prefix  --------------|- " + str(self.args.Host[-2:]))+"\n"
+                               if "/" in self.args.Host[-2:]:
+                                   printF  +=("[+] NetWork-Prefix  --------------|- " + str(self.args.Host[-1:]))+"\n"
+                               else:
+                                   printF  +=("[+] NetWork-Prefix  --------------|- " + str(self.args.Host[-2:]))+"\n"  
                            printF  += ("[+] Subnet-Mask     --------------|- " +  str(SubNet))+"\n"
                            printF  += ("[+] Start ip        --------------|- " +  str([ x for x in Network.hosts()][0]))+"\n"
                            printF  += ("[+] Last ip         --------------|- " +  str([ x for  x  in  Network.hosts()][-1]))+"\n"
@@ -212,7 +218,7 @@ class Host_One():
                               out_put.write(Banner) 
                except Exception  :                       
                       print("\n"+"="*50+"\n"+"[*] HOST (",self.args.Host,")   -------------| ValueError"+"\n"+"="*50+"\n")
-            except KeyboardInterrupt:
+               except KeyboardInterrupt:
                       print(Banner)
                       if self.args.output:
                            with open(self.args.output,'a') as out_put :
