@@ -11792,7 +11792,7 @@
 0050C234B  Ecutel  Systems,  Inc.
 0050C234C  Chuo  Electric  Works  Co.,  LTD.
 0050C234D  BMK  professional  electronics  GmbH
-0050C234E  ABB  Power  Technologies  S.p.A.    Unità   Operativa  SACE  (PTMV)
+0050C234E  ABB  Power  Technologies  S.p.A.    Unità   Operativa  SACE  (PTMV)
 0050C234F  North  Pole  Engineering,  Inc.
 0050C2350  Kinesys  Projects  Limited
 0050C2351  Finesystem  Co.,  Ltd
@@ -11936,7 +11936,7 @@
 0050C23DB  Osmetech  Inc.
 0050C23DC  3D  perception
 0050C23DD  ELMIC  GmbH
-0050C23DE  ABB  Power  Technologies  S.p.A.    Unità   Operativa  SACE  (PTMV)
+0050C23DE  ABB  Power  Technologies  S.p.A.    Unità   Operativa  SACE  (PTMV)
 0050C23DF  BiODE  Inc.
 0050C23E0  Oy  Stinghorn  Ltd
 0050C23E1  NeuLion  Incorporated
@@ -16351,7 +16351,7 @@
 00B771  Cisco  Systems,  Inc
 00B78D  Nanjing  Shining  Electric  Automation  Co.,  Ltd
 00B7A8  Heinzinger  electronic  GmbH
-00B810  Yichip Microelectronics  (Hangzhou)  Co.,Ltd
+00B810  Yichip Microelectronics  (Hangzhou)  Co.,Ltd
 00B881  New  platforms  LLC
 00B8B3  Cisco  Systems,  Inc
 00B8B6  Motorola  Mobility  LLC,  a  Lenovo  Company
@@ -17327,14 +17327,14 @@
 042AE2  Cisco  Systems,  Inc
 042B58  Shenzhen  Hanzsung  Technology  Co.,Ltd
 042BBB  PicoCELA,  Inc.
-042DB4  First  Property  (Beijing)  Co.
+042DB4  First  Property  (Beijing)  Co.,  Ltd  Modern  MOMA  Branch
 042F56  ATOCS  (Shenzhen)  LTD
 043110  Inspur  Group  Co.,  Ltd.
 0432F4  Partron
 043385  Nanchang  BlackShark  Co.,Ltd.
 043389  HUAWEI  TECHNOLOGIES  CO.,LTD
 0433C2  Intel  Corporate
-0434F6  Motorola  (Wuhan)  Mobility  
+0434F6  Motorola  (Wuhan)  Mobility  Technologies  Communication  Co.,  Ltd.
 043604  Gyeyoung  IT
 043855  SCOPUS  INTERNATIONAL-BELGIUM
 043926  China  Dragon  Technology  Limited
@@ -19759,7 +19759,7 @@
 1CC0E1E  Yun  Yang  Fire  Safety  Equipment  Co.,Ltd.
 1CC10C  Intel  Corporate
 1CC11A  Wavetronix
-1CC1BC  Yichip Microelectronics  (Hangzhou)  Co.,Ltd
+1CC1BC  Yichip Microelectronics  (Hangzhou)  Co.,Ltd
 1CC1DE  Hewlett  Packard
 1CC316  MileSight  Technology  Co.,  Ltd.
 1CC3EB  GUANGDONG  OPPO  MOBILE  TELECOMMUNICATIONS  CORP.,LTD
@@ -21409,7 +21409,7 @@
 30862D  Arista  Network,  Inc.
 308730  HUAWEI  TECHNOLOGIES  CO.,LTD
 3087D9  Ruckus  Wireless
-308841  Sichuan AI-Link Technology Co., Ltd.
+308841  Sichuan AI-Link Technology Co., Ltd.
 308944  DEVA  Broadcast  Ltd.
 308976  DALIAN  LAMBA  TECHNOLOGY  CO.,LTD
 308999  Guangdong  East  Power  Co.,
@@ -23733,7 +23733,7 @@
 44AE44  Huawei  Device  Co.,  Ltd.
 44AEAB  GUANGDONG  OPPO  MOBILE  TELECOMMUNICATIONS  CORP.,LTD
 44AF28  Intel  Corporate
-44B295  Sichuan AI-Link Technology Co., Ltd.
+44B295  Sichuan AI-Link Technology Co., Ltd.
 44B32D  TP-LINK  TECHNOLOGIES  CO.,LTD.
 44B382  Kuang-chi  Institute  of  Advanced  Technology
 44B412  SIUS  AG
@@ -24018,7 +24018,7 @@
 489153  Weinmann  Geräte  für  Medizin  GmbH    Co.  KG
 4891F6  Shenzhen  Reach  software  technology  CO.,LTD
 489507  GUANGDONG  OPPO  MOBILE  TELECOMMUNICATIONS  CORP.,LTD
-4898CA  Sichuan AI-Link Technology Co., Ltd.
+4898CA  Sichuan AI-Link Technology Co., Ltd.
 489A42  Technomate  Ltd
 489BD5  Extreme  Networks,  Inc.
 489BE2  SCI  Innovations  Ltd
@@ -24538,7 +24538,7 @@
 500F80  Cisco  Systems,  Inc
 500FF5  Tenda  Technology  Co.,Ltd.Dongguan  branch
 5011EB  SilverNet  Ltd
-501395  Sichuan AI-Link Technology Co., Ltd.
+501395  Sichuan AI-Link Technology Co., Ltd.
 501408  AiNET
 501479  iRobot  Corporation  
 5014B5  Richfit  Information  Technology  Co.,  Ltd
@@ -25859,7 +25859,7 @@
 602103  I4VINE,  INC
 6021C0  Murata  Manufacturing  Co.,  Ltd.
 602232  Ubiquiti  Networks  Inc.
-6023A4  Sichuan AI-Link Technology Co., Ltd.
+6023A4  Sichuan AI-Link Technology Co., Ltd.
 6024C1  Jiangsu  Zhongxun  Electronic  Technology  Co.,  Ltd
 6026EF  Aruba,  a  Hewlett  Packard  Enterprise  Company
 60271C  VIDEOR  E.  Hartig  GmbH
@@ -32885,7 +32885,7 @@
 8096CA  Hon  Hai  Precision  Ind.  Co.,Ltd.
 80971B  Altenergy  Power  System,Inc.
 809B20  Intel  Corporate
-809F9B  Sichuan AI-Link Technology Co., Ltd.
+809F9B  Sichuan AI-Link Technology Co., Ltd.
 809FAB  Fiberhome  Telecommunication  Technologies  Co.,LTD
 809FF5  Samsung  Electronics  Co.,Ltd
 80A036  Shanghai  MXCHIP  Information  Technology  Co.,  Ltd.
@@ -32896,7 +32896,7 @@
 80A796  Neurotek  LLC
 80A85D  Osterhout  Design  Group
 80AAA4  USAG
-80AC7C  Sichuan AI-Link Technology Co., Ltd.
+80AC7C  Sichuan AI-Link Technology Co., Ltd.
 80ACAC  Juniper  Networks
 80AD16  Xiaomi  Communications  Co  Ltd
 80AD67  Kasda  Networks  Inc
@@ -33195,13 +33195,13 @@
 848A8D  Cisco  Systems,  Inc
 848BCD  IEEE  Registration  Authority
 848BCD0  SouXin  Corporate
-848BCD1  Shenzhen LTIME In-Vehicle Entertainment System Company Limited
+848BCD1  Shenzhen LTIME In-Vehicle Entertainment System Company Limited
 848BCD2  CCX  Technologies  Inc.
 848BCD3  Annapurna  labs
 848BCD4  Logic  Supply
 848BCD5  exodraft  as
 848BCD6  TWTG  RD  B.V.  
-848BCD7  Smart Code  (Shenzhen)  Technology  Co.,Ltd
+848BCD7  Smart Code  (Shenzhen)  Technology  Co.,Ltd
 848BCD8  Dunst  tronic  GmbH
 848BCD9  NORALSY
 848BCDA  Sphera  Telecom
@@ -33544,7 +33544,7 @@
 889676  TTC  MARCONI  s.r.o.
 8896B6  Global  Fire  Equipment  S.A.
 8896F2  Valeo  Schalter  und  Sensoren  GmbH
-889746  Sichuan AI-Link Technology Co., Ltd.
+889746  Sichuan AI-Link Technology Co., Ltd.
 889765  exands
 8897DF  Entrypass  Corporation  Sdn.  Bhd.
 889821  TERAON
@@ -35569,7 +35569,7 @@
 9C807D  SYSCABLE  Korea  Inc.
 9C80DF  Arcadyan  Technology  Corporation
 9C823F  Huawei  Device  Co.,  Ltd.
-9C8275  Yichip Microelectronics  (Hangzhou)  Co.,Ltd
+9C8275  Yichip Microelectronics  (Hangzhou)  Co.,Ltd
 9C8281  vivo  Mobile  Communication  Co.,  Ltd.
 9C83BF  PRO-VISION,  Inc.
 9C84BF  Apple,  Inc.
@@ -37513,7 +37513,7 @@ B437D1  IEEE  Registration  Authority
 B437D10  Lezyne  INC  USA
 B437D11  Alturna  Networks
 B437D12  Fibersystem  AB
-B437D13  DIMTON CO.,LTD.
+B437D13  DIMTON CO.,LTD.
 B437D14  KOMSIS  ELEKTRONIK  SISTEMLERI  SAN.  TIC.  LTD.STI
 B437D15  Stratom,  Inc.
 B437D16  Yireh  Auto  Tech  Co.,Ltd.
@@ -37666,7 +37666,7 @@ B4A9FE  GHIA  Technology  (Shenzhen)  LTD
 B4AA4D  Ensequence,  Inc.
 B4AB2C  MtM  Technology  Corporation
 B4AC8C  Berner  Fachhochschule
-B4ADA3  Guangzhou Shiyuan Electronic Technology Company Limited
+B4ADA3  Guangzhou Shiyuan Electronic Technology Company Limited
 B4AE2B  Microsoft
 B4AE6F  Circle  Reliance,  Inc  DBA  Cranberry  Networks
 B4B017  Avaya  Inc
@@ -38380,7 +38380,7 @@ BCF61C  Geomodeling  Wuxi  Technology  Co.  Ltd.
 BCF685  D-Link  International
 BCF811  Xiamen  DNAKE  Technology  Co.,Ltd
 BCF9F2  TEKO
-BCFAB8  Guangzhou Shiyuan Electronic Technology Company Limited
+BCFAB8  Guangzhou Shiyuan Electronic Technology Company Limited
 BCFE8C  Altronic,  LLC
 BCFED9  Apple,  Inc.
 BCFF21  Smart  Code(shenzhen)Technology  Co.,Ltd
@@ -38924,7 +38924,7 @@ C49500  Amazon  Technologies  Inc.
 C4954D  IEEE  Registration  Authority
 C4954D0  BA  International  Electronics  Co.  Ltd.
 C4954D1  Teletronik  AG
-C4954D2  Shen Zhen Euse Technology Co.,Ltd
+C4954D2  Shen Zhen Euse Technology Co.,Ltd
 C4954D3  Sercomm  Corporation.
 C4954D4  GL  Solutions  Inc.
 C4954D5  Marble  Automation
@@ -40360,7 +40360,7 @@ D49CDD  AMPAK  Technology,Inc.
 D49CF4  Palo  Alto  Networks
 D49DC0  Samsung  Electronics  Co.,Ltd
 D49E05  zte  corporation
-D49E3B  Guangzhou Shiyuan Electronic Technology Company Limited
+D49E3B  Guangzhou Shiyuan Electronic Technology Company Limited
 D49E6D  Wuhan  Zhongyuan  Huadian  Science    Technology  Co.,
 D4A02A  Cisco  Systems,  Inc
 D4A148  HUAWEI  TECHNOLOGIES  CO.,LTD
@@ -40385,7 +40385,7 @@ D4B169  Le  Shi  Zhi  Xin  Electronic  Technology  (Tianjin)  Limited
 D4B27A  ARRIS  Group,  Inc.
 D4B43E  Messcomp  Datentechnik  GmbH
 D4B709  zte  corporation
-D4B761  Sichuan AI-Link Technology Co., Ltd.
+D4B761  Sichuan AI-Link Technology Co., Ltd.
 D4B7D0  Ciena  Corporation
 D4B8FF  Home  Control  Singapore  Pte  Ltd
 D4B92F  Technicolor  CH  USA  Inc.
@@ -40989,7 +40989,7 @@ DCB72E  Xiaomi  Communications  Co  Ltd
 DCB7FC  Alps  Electric  (Ireland)  Ltd
 DCB808  Extreme  Networks,  Inc.
 DCBB96  Full  Solution  Telecom
-DCBD7A  Guangzhou Shiyuan Electronic Technology Company Limited
+DCBD7A  Guangzhou Shiyuan Electronic Technology Company Limited
 DCBE7A  Zhejiang  Nurotron  Biotechnology  Co.
 DCBF90  HUIZHOU  QIAOXING  TELECOMMUNICATION  INDUSTRY  CO.,LTD.
 DCBFE9  Motorola  Mobility  LLC,  a  Lenovo  Company
@@ -42193,7 +42193,7 @@ EC9A74  Hewlett  Packard
 EC9B5B  Nokia  Corporation
 EC9B8B  Hewlett  Packard  Enterprise
 EC9BF3  SAMSUNG  ELECTRO-MECHANICS(THAILAND)
-EC9C32  Sichuan AI-Link Technology Co., Ltd.
+EC9C32  Sichuan AI-Link Technology Co., Ltd.
 EC9ECD  Artesyn  Embedded  Technologies
 EC9F0D  IEEE  Registration  Authority
 EC9F0D0  Hesai  Photonics  Technology  Co.,  Ltd
@@ -43705,3 +43705,4 @@ FCFE77  Hitachi  Reftechno,  Inc.
 FCFEC2  Invensys  Controls  UK  Limited
 FCFFAA  IEEE  Registration  Authority
 </MacAddressVendorMappings>
+
